@@ -1,0 +1,11 @@
+.Card-container{
+    display:flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 2rem;
+
+}
+
+.card:not(:first-child){
+    font-style: italic;
+}
