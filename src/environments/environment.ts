@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase:{
+    apiKey: "AIzaSyBGfEVvBKDor0rYsp1tmhKzQ-JOczxj9lg",
+    authDomain: "sistema-contable-schenk.firebaseapp.com",
+    projectId: "sistema-contable-schenk",
+    storageBucket: "sistema-contable-schenk.appspot.com",
+    messagingSenderId: "988326800187",
+    appId: "1:988326800187:web:25ef77d43bb228f3f9651e",
+    measurementId: "G-MSV97VY5LY"
+  }
 };
 
 /*
