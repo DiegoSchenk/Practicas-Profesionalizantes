@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 // Imports Propios
 
 import { MatToolbarModule } from '@angular/material/toolbar';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -20,6 +20,12 @@ import { TableComponent } from './components/table/table.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+//Services
+import { AuditoriaService } from './services/auditoria.service';
+import { ClientesService } from './services/clientes.service';
+import { SivaService } from './services/siva.service';
+import { UsuariosService } from './services/usuarios.service';
+import { DatabaseService } from './services/database.service'; 
 
 @NgModule({
   declarations: [
@@ -40,7 +46,13 @@ import { TooltipComponent } from './components/tooltip/tooltip.component';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule
   ],
-  providers: [],
+  providers: [
+    AuditoriaService,
+    ClientesService,
+    SivaService,
+    UsuariosService,
+    DatabaseService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
