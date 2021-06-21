@@ -7,6 +7,7 @@ export const environment = {
   firebase:{
     apiKey: "AIzaSyBGfEVvBKDor0rYsp1tmhKzQ-JOczxj9lg",
     authDomain: "sistema-contable-schenk.firebaseapp.com",
+    databaseURL: "https://sistema-contable-schenk-default-rtdb.firebaseio.com",
     projectId: "sistema-contable-schenk",
     storageBucket: "sistema-contable-schenk.appspot.com",
     messagingSenderId: "988326800187",
