@@ -5,10 +5,12 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatCardModule } from '@angular/material/card';
+import { MatTableModule } from '@angular/material/table';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MiComponenteComponent } from './components/mi-componente/mi-componente.component';
+import { TableexampleComponent } from './components/tableexample/tableexample.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Firebase
 import { environment } from '../environments/environment';
@@ -18,6 +20,7 @@ import { TableComponent } from './components/table/table.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+
 //Services
 import { AuditoriaService } from './services/auditoria.service';
 import { ClientesService } from './services/clientes.service';
@@ -33,14 +36,16 @@ import { DatabaseService } from './services/database.service';
     TableComponent,
     DialogComponent,
     ButtonComponent,
-    TooltipComponent
+    TooltipComponent,
+    TableexampleComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    MatTableModule
   ],
   providers: [
     AuditoriaService,
