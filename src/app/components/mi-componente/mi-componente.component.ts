@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { DatabaseService } from 'src/app/services/database.service'; 
 
 @Component({
   selector: 'app-mi-componente',
@@ -9,7 +10,9 @@ export class MiComponenteComponent implements OnInit {
 
   @Input() titulo!:string;
 
-  constructor() { }
+  constructor(private dbservice: DatabaseService) {
+
+   }
 
   ngOnInit(): void {
   }

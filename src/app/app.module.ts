@@ -12,6 +12,9 @@ import { MiComponenteComponent } from './components/mi-componente/mi-componente.
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 //Firebase
 import { environment } from '../environments/environment';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireStorageModule } from '@angular/fire/storage';
 //Components
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TableComponent } from './components/table/table.component';
@@ -40,7 +43,10 @@ import { DatabaseService } from './services/database.service';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatToolbarModule,
-    MatCardModule
+    MatCardModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFirestoreModule,
+    AngularFireStorageModule
   ],
   providers: [
     AuditoriaService,
