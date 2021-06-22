@@ -23,6 +23,8 @@ import { TableComponent } from './components/table/table.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { ButtonComponent } from './components/button/button.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
+//authO
+import { AuthModule } from '@auth0/auth0-angular';
 
 //Services
 import { AuditoriaService } from './services/auditoria.service';
@@ -51,7 +53,11 @@ import { DatabaseService } from './services/database.service';
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
-    AngularFireStorageModule
+    AngularFireStorageModule,
+    AuthModule.forRoot({
+      domain: 'YOUR_DOMAIN',
+      clientId: 'YOUR_CLIENT_ID'
+    }),
   ],
   providers: [
     AuditoriaService,
