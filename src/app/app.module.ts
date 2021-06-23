@@ -17,6 +17,7 @@ import { environment } from '../environments/environment';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { ToastrModule } from 'ngx-toastr';
 //Components
 import { TabsComponent } from './components/tabs/tabs.component';
 import { TableComponent } from './components/table/table.component';
@@ -30,10 +31,12 @@ import {MaterialModule} from './material-module';
 
 //Services
 import { AuditoriaService } from './services/auditoria.service';
-import { ClientesService } from './services/clientes.service';
+import { ClienteService } from './services/clientes.service';
 import { SivaService } from './services/siva.service';
 import { UsuariosService } from './services/usuarios.service';
-import { DatabaseService } from './services/database.service'; 
+import { DatabaseService } from './services/database.service';
+import { ListClientesComponent } from './components/list-clientes/list-clientes.component';
+import { CreateClientesComponent } from './components/create-clientes/create-clientes.component'; 
 
 @NgModule({
   declarations: [
@@ -44,7 +47,9 @@ import { DatabaseService } from './services/database.service';
     DialogComponent,
     ButtonComponent,
     TooltipComponent,
-    TableexampleComponent
+    TableexampleComponent,
+    ListClientesComponent,
+    CreateClientesComponent
   ],
   imports: [
     BrowserModule,
@@ -55,6 +60,7 @@ import { DatabaseService } from './services/database.service';
     MatTableModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
+    ToastrModule.forRoot(),
     AngularFireStorageModule,
     AuthModule.forRoot({
       domain: 'YOUR_DOMAIN',
@@ -63,7 +69,7 @@ import { DatabaseService } from './services/database.service';
   ],
   providers: [
     AuditoriaService,
-    ClientesService,
+    ClienteService,
     SivaService,
     UsuariosService,
     DatabaseService
