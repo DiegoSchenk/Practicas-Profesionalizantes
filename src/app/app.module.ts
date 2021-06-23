@@ -33,7 +33,8 @@ import { AuditoriaService } from './services/auditoria.service';
 import { ClientesService } from './services/clientes.service';
 import { SivaService } from './services/siva.service';
 import { UsuariosService } from './services/usuarios.service';
-import { DatabaseService } from './services/database.service'; 
+import { DatabaseService } from './services/database.service';
+import { LoginComponent } from './components/login/login.component'; 
 
 @NgModule({
   declarations: [
@@ -44,7 +45,8 @@ import { DatabaseService } from './services/database.service';
     DialogComponent,
     ButtonComponent,
     TooltipComponent,
-    TableexampleComponent
+    TableexampleComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -56,6 +58,7 @@ import { DatabaseService } from './services/database.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
     AngularFireStorageModule,
+    MaterialModule,
     AuthModule.forRoot({
       domain: 'YOUR_DOMAIN',
       clientId: 'YOUR_CLIENT_ID'
