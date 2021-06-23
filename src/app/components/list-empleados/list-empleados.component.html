@@ -1,0 +1,57 @@
+<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+  <li class="nav-item" role="presentation">
+    <button class="nav-link active" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Home</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-profile-tab" data-bs-toggle="pill" data-bs-target="#pills-profile" type="button" role="tab" aria-controls="pills-profile" aria-selected="false">Profile</button>
+  </li>
+  <li class="nav-item" role="presentation">
+    <button class="nav-link" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Contact</button>
+  </li>
+</ul>
+
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">b</div>
+  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">aa  </div>
+  <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">c</div>
+</div>
+
+
+<div class="container mt-4">
+  <div class="card">
+      <div class="card-body">
+          <span class="h3">Listado de Clientes</span>
+          <button class="btn btn-dark btn-lg float-right" routerLink="/create-empleado">Agregar</button>
+          <h5 style="margin-top: 30px;" *ngIf="empleados.length == 0">No hay datos para mostrar</h5>
+          <table *ngIf="empleados.length > 0" class="table table-striped mt-5">
+              <thead>
+                <tr>
+                  <th>DNI</th>
+                  <th>Nombre</th>
+                  <th>Apellido</th>
+                  <th>Direccion</th>
+                  <th>Telefono</th>
+                  <th>Ciudad</th>
+                  <th>Situacion Frente al IVA</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let empleado of empleados">
+                  <td>{{ empleado.nombre }}</td>
+                  <td>{{ empleado.apellido }}</td>
+                  <td>{{ empleado.dni }}</td>
+                  <td>{{ empleado.direccion }}</td>
+                  <td>{{ empleado.celular }}</td>
+                  <td>{{ empleado.ciudad }}</td>
+                  <td>{{ empleado.iva }}</td>
+                  <td>
+                    <i class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editEmpleado/', empleado.id]"></i>
+                    <i (click)="eliminarEmpleado(empleado.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+      </div>
+  </div>
+</div>

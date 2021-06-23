@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { CreateClientesComponent } from './components/create-clientes/create-clientes.component';
-import { ListClientesComponent } from './components/list-clientes/list-clientes.component';
+import { Routes, RouterModule } from '@angular/router';
+import { CreateEmpleadoComponent } from './components/create-empleado/create-empleado.component';
+import { ListEmpleadosComponent } from './components/list-empleados/list-empleados.component';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list-clientes', pathMatch: 'full' },
-  { path: 'list-clientes', component: ListClientesComponent },
-  { path: 'create-cliente', component: CreateClientesComponent },
-  { path: 'editCliente/:id', component: CreateClientesComponent },
-  { path: '**', redirectTo: 'list-clientes', pathMatch: 'full' },
+  { path: '', redirectTo: 'list-empleados', pathMatch: 'full' },
+  { path: 'list-empleados', component: ListEmpleadosComponent },
+  { path: 'create-empleado', component: CreateEmpleadoComponent },
+  { path: 'editEmpleado/:id', component: CreateEmpleadoComponent },
+  { path: '**', redirectTo: 'list-empleados', pathMatch: 'full' },
 ];
 
 @NgModule({

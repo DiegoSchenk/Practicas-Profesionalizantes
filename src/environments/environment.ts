@@ -1,13 +1,13 @@
 // This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
+// `ng build --prod` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
   production: false,
-  firebase:{
+  firebase: {
     apiKey: "AIzaSyBGfEVvBKDor0rYsp1tmhKzQ-JOczxj9lg",
     authDomain: "sistema-contable-schenk.firebaseapp.com",
-    databaseURL: "https://sistema-contable-schenk-default-rtdb.firebaseio.com",
+    databaseURL: "https://sistema-contable-schenk-default-rtdb.firebaseio.com/",
     projectId: "sistema-contable-schenk",
     storageBucket: "sistema-contable-schenk.appspot.com",
     messagingSenderId: "988326800187",
@@ -23,4 +23,4 @@ export const environment = {
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.
  */
-// import 'zone.js/plugins/zone-error';  // Included with Angular CLI.
+// import 'zone.js/dist/zone-error';  // Included with Angular CLI.

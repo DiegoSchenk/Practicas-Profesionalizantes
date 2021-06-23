@@ -1,17 +1,2 @@
-
-<!-- Toolbar -->
-<mat-toolbar>
-  <span>My Application</span>
-</mat-toolbar>
-
-
-<!-- Encapsulado en el archivo  --> 
-
-<div class="Card-container">
-  <app-mi-componente class="card" [titulo]="'Wawif'+ i" [id]="'card-'+i" *ngFor="let i of [1,2,3]"></app-mi-componente>
-</div>
-
-
-
-<app-login></app-login>
+<app-navbar></app-navbar>
 <router-outlet></router-outlet>
