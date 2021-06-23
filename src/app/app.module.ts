@@ -37,6 +37,7 @@ import { UsuariosService } from './services/usuarios.service';
 import { DatabaseService } from './services/database.service';
 import { ListClientesComponent } from './components/list-clientes/list-clientes.component';
 import { CreateClientesComponent } from './components/create-clientes/create-clientes.component'; 
+import { LoginComponent } from './components/login/login.component'; 
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { CreateClientesComponent } from './components/create-clientes/create-cli
     TooltipComponent,
     TableexampleComponent,
     ListClientesComponent,
-    CreateClientesComponent
+    CreateClientesComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -62,6 +64,7 @@ import { CreateClientesComponent } from './components/create-clientes/create-cli
     AngularFirestoreModule,
     ToastrModule.forRoot(),
     AngularFireStorageModule,
+    MaterialModule,
     AuthModule.forRoot({
       domain: 'YOUR_DOMAIN',
       clientId: 'YOUR_CLIENT_ID'

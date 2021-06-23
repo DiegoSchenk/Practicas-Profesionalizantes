@@ -1,0 +1,11 @@
+.example-form {
+    width: 100%;
+    max-width: 330px;
+    padding: 15px;
+    margin: auto;
+    text-align: center;
+  }
+  
+  .example-full-width {
+    width: 100%;
+  }
