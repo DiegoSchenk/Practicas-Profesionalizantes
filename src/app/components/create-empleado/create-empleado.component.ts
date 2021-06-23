@@ -84,7 +84,6 @@ export class CreateEmpleadoComponent implements OnInit {
       nombre: this.createEmpleado.value.nombre,
       apellido: this.createEmpleado.value.apellido,
       dni: this.createEmpleado.value.dni,
-      salario: this.createEmpleado.value.salario,
       direccion: this.createEmpleado.value.direccion,
       celular: this.createEmpleado.value.celular,
       ciudad: this.createEmpleado.value.ciudad,
