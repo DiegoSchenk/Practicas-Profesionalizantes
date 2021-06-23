@@ -38,6 +38,7 @@ import { DatabaseService } from './services/database.service';
 import { ListClientesComponent } from './components/list-clientes/list-clientes.component';
 import { CreateClientesComponent } from './components/create-clientes/create-clientes.component'; 
 import { LoginComponent } from './components/login/login.component'; 
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,7 @@ import { LoginComponent } from './components/login/login.component';
     ToastrModule.forRoot(),
     AngularFireStorageModule,
     MaterialModule,
+    ReactiveFormsModule,
     AuthModule.forRoot({
       domain: 'YOUR_DOMAIN',
       clientId: 'YOUR_CLIENT_ID'
