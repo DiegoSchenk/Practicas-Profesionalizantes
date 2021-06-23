@@ -25,6 +25,8 @@ import { ButtonComponent } from './components/button/button.component';
 import { TooltipComponent } from './components/tooltip/tooltip.component';
 //authO
 import { AuthModule } from '@auth0/auth0-angular';
+//Material
+import {MaterialModule} from './material-module';
 
 //Services
 import { AuditoriaService } from './services/auditoria.service';
