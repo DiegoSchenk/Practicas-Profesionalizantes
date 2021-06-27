@@ -14,6 +14,15 @@ import { ListEmpleadosComponent } from './components/list-empleados/list-emplead
 import { CreateEmpleadoComponent } from './components/create-empleado/create-empleado.component';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { environment } from 'src/environments/environment';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatGridListModule } from '@angular/material/grid-list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { SituacionIVAComponent } from './components/situacion-iva/situacion-iva.component';
+import { AuditoriaComponent } from './components/auditoria/auditoria.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +30,8 @@ import { environment } from 'src/environments/environment';
     ListEmpleadosComponent,
     CreateEmpleadoComponent,
     NavbarComponent,
+    SituacionIVAComponent,
+    AuditoriaComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +40,14 @@ import { environment } from 'src/environments/environment';
     AngularFirestoreModule,
     ReactiveFormsModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatTabsModule,
+    MatButtonModule,
+    MatGridListModule,
+    MatIconModule,
+    MatMenuModule,
+    MatSidenavModule,
+    MatToolbarModule
   ],
   providers: [],
   bootstrap: [AppComponent]
