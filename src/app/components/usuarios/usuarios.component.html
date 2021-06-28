@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <span class="h3">Listado de Usuarios</span>
+            <button class="btn btn-dark btn-lg float-right" routerLink="/create-usuarios">Agregar</button>
+            <h5 style="margin-top: 30px;" *ngIf="usuarios.length == 0">No hay datos para mostrar</h5>
+            <table *ngIf="usuarios.length > 0" class="table table-striped mt-5">
+                <thead>
+                  <tr>
+                    <th>Codigo</th>
+                    <th>Usuario</th>
+                    <th>Contrasena</th>
+                    <th></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let usuario of usuarios">
+                    <td>{{ usuario.codigo }}</td>
+                    <td>{{ usuario.usuario }}</td>
+                    <td>{{ usuario.contrasena }}</td>
+                    <td>
+                      <i class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editUsuario/', usuario.id]"></i>
+                      <i (click)="eliminarUsuario(usuario.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>

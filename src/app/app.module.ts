@@ -23,6 +23,9 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SituacionIVAComponent } from './components/situacion-iva/situacion-iva.component';
 import { AuditoriaComponent } from './components/auditoria/auditoria.component';
+import { CreateIvaComponent } from './components/create-iva/create-iva.component';
+import { UsuariosComponent } from './components/usuarios/usuarios.component';
+import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { AuditoriaComponent } from './components/auditoria/auditoria.component';
     NavbarComponent,
     SituacionIVAComponent,
     AuditoriaComponent,
+    CreateIvaComponent,
+    UsuariosComponent,
+    CreateUsuarioComponent,
   ],
   imports: [
     BrowserModule,

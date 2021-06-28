@@ -4,6 +4,7 @@ import { CreateEmpleadoComponent } from './components/create-empleado/create-emp
 import { ListEmpleadosComponent } from './components/list-empleados/list-empleados.component';
 import { SituacionIVAComponent } from './components/situacion-iva/situacion-iva.component';
 import { AuditoriaComponent } from './components/auditoria/auditoria.component';
+import { CreateIvaComponent } from './components/create-iva/create-iva.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'list-empleados', pathMatch: 'full' },
@@ -12,6 +13,7 @@ const routes: Routes = [
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent },
   { path: 'situacioniva', component: SituacionIVAComponent},
   { path: 'auditoria', component: AuditoriaComponent},
+  { path: 'create-iva', component: CreateIvaComponent },
   { path: '**', redirectTo: 'list-empleados', pathMatch: 'full' },
 ];
 

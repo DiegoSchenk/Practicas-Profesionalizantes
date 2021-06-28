@@ -14,7 +14,7 @@ export class CreateEmpleadoComponent implements OnInit {
   submitted = false;
   loading = false;
   id: string | null;
-  titulo = 'Agregar Empleado';
+  titulo = 'Agregar Cliente';
 
   constructor(private fb: FormBuilder,
     private _empleadoService: EmpleadoService,
@@ -67,7 +67,7 @@ export class CreateEmpleadoComponent implements OnInit {
     }
     this.loading = true;
     this._empleadoService.agregarEmpleado(empleado).then(() => {
-      this.toastr.success('El empleado fue registrado con exito!', 'Empleado Registrado', {
+      this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
         positionClass: 'toast-bottom-right'
       });
       this.loading = false;
@@ -95,7 +95,7 @@ export class CreateEmpleadoComponent implements OnInit {
 
     this._empleadoService.actualizarEmpleado(id, empleado).then(() => {
       this.loading = false;
-      this.toastr.info('El empleado fue modificado con exito', 'Empleado modificado', {
+      this.toastr.info('El cliente fue modificado con exito', 'Cliente modificado', {
         positionClass: 'toast-bottom-right'
       })
       this.router.navigate(['/list-empleados']);
@@ -104,7 +104,7 @@ export class CreateEmpleadoComponent implements OnInit {
 
 
   esEditar() {
-    this.titulo = 'Editar Empleado'
+    this.titulo = 'Editar Cliente'
     if (this.id !== null) {
       this.loading = true;
       this._empleadoService.getEmpleado(this.id).subscribe(data => {

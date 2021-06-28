@@ -1,1 +1,27 @@
-<p>situacion-iva works!</p>
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <span class="h3">Listado de Situaciones de IVA</span>
+            <button class="btn btn-dark btn-lg float-right" routerLink="/create-iva">Agregar</button>
+            <h5 style="margin-top: 30px;" *ngIf="situacionesIVA.length == 0">No hay datos para mostrar</h5>
+            <table *ngIf="situacionesIVA.length > 0" class="table table-striped mt-5">
+                <thead>
+                  <tr>
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let situacionIVA of situacionesIVA">
+                    <td>{{ situacionIVA.codigo }}</td>
+                    <td>{{ situacionIVA.descripcion }}</td>
+                    <td>
+                      <i class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editSituacionIVA/', situacionIVA.id]"></i>
+                      <i (click)="eliminarSituacionIVA(situacionIVA.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
