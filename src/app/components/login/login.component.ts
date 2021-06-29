@@ -15,6 +15,14 @@ export class LoginComponent implements OnInit {
   }
 
   ingresar() {
+  /*  
+    if (true) {
+        console.log('This will always executed.');
+    }
+    else{
+
+    }
+    */
     this.router.navigateByUrl('/list-empleados');
   }
 
