@@ -17,6 +17,8 @@ const routes: Routes = [
   { path: 'list-empleados', component: ListEmpleadosComponent },
   { path: 'create-empleado', component: CreateEmpleadoComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent },
+  { path: 'editSituacionIVA/:id', component: CreateIvaComponent },
+  { path: 'editUsuario/:id', component: CreateUsuarioComponent },
   { path: 'situacioniva', component: SituacionIVAComponent},
   { path: 'auditoria', component: AuditoriaComponent},
   { path: 'usuarios', component: UsuariosComponent},
