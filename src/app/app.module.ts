@@ -29,6 +29,7 @@ import { CreateIvaComponent } from './components/create-iva/create-iva.component
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
 import { LoginComponent } from './components/login/login.component';
+import { RolService } from './services/rol.service';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,7 @@ import { LoginComponent } from './components/login/login.component';
     MatFormFieldModule,
     MatInputModule
   ],
-  providers: [],
+  providers: [RolService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
