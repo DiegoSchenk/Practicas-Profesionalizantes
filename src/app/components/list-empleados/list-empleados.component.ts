@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
+import * as printJS from 'print-js';
 
 @Component({
   selector: 'app-list-empleados',
@@ -12,6 +13,7 @@ import { RolService } from 'src/app/services/rol.service';
 })
 export class ListEmpleadosComponent implements OnInit {
   empleados: any[] = [];
+  empleadosJSON: JSON;
 
   constructor(private _empleadoService: EmpleadoService,
               private toastr: ToastrService, private rol: RolService) {
@@ -34,6 +36,10 @@ export class ListEmpleadosComponent implements OnInit {
       });
       console.log(this.empleados);
     });
+  }
+
+  print(){
+    printJS({printable: this.empleadosJSON, properties:['dni', 'nombre', 'apellido', 'direccion', 'telefono', 'ciudad', 'iva'], type: 'json'})
   }
 
   eliminarEmpleado(id: string) {
