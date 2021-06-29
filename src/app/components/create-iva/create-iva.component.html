@@ -22,6 +22,7 @@
                             <span class="sr-only">Loading...</span>
                           </div>
                     </span>
+                    <br>
                     <span *ngIf="submitted && createSituacionIVA.invalid" class="badge badge-danger">TODOS LOS CAMPOS SON OBLIGATORIOS</span>
                     <form class="mt-4" [formGroup]="createSituacionIVA" (ngSubmit)="agregarEditarSituacionIVA()">
                         <div class="row">

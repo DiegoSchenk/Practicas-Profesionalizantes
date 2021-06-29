@@ -22,6 +22,7 @@
                             <span class="sr-only">Loading...</span>
                           </div>
                     </span>
+                    <br>
                     <span *ngIf="submitted && createUsuario.invalid" class="badge badge-danger">TODOS LOS CAMPOS SON OBLIGATORIOS</span>
                     <form class="mt-4" [formGroup]="createUsuario" (ngSubmit)="agregarEditarUsuario()">
                         <input type="number" class="form-control form-control-lg" formControlName="codigo"
