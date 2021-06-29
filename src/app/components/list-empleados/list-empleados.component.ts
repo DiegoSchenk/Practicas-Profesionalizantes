@@ -37,14 +37,17 @@ export class ListEmpleadosComponent implements OnInit {
   }
 
   eliminarEmpleado(id: string) {
+    if( this.rol.getRol() != 4){
     this._empleadoService.eliminarEmpleado(id).then(() => {
-      console.log('empelado eliminado con exito');
+      
       this.toastr.error('El cliente fue eliminado con exito', 'Registro eliminado!', {
         positionClass: 'toast-bottom-right'
       });
     }).catch(error => {
       console.log(error);
     })
+  } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
+
   }
 
 

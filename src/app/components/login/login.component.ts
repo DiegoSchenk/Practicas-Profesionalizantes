@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
       var rol = user[0]['codigo'];
        if (rol === 3) {
         this.router.navigateByUrl('/auditoria');
-       } else { if (rol === 4) {this.router.navigateByUrl('/usuarios');}
+       } else { if (rol === 4) {this.router.navigateByUrl('/list-empleados');}
           else {this.router.navigateByUrl('/list-empleados');}
       }
   
