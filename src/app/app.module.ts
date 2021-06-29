@@ -21,11 +21,14 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import { SituacionIVAComponent } from './components/situacion-iva/situacion-iva.component';
 import { AuditoriaComponent } from './components/auditoria/auditoria.component';
 import { CreateIvaComponent } from './components/create-iva/create-iva.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
+import { LoginComponent } from './components/login/login.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +41,7 @@ import { CreateUsuarioComponent } from './components/create-usuario/create-usuar
     CreateIvaComponent,
     UsuariosComponent,
     CreateUsuarioComponent,
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,7 +57,9 @@ import { CreateUsuarioComponent } from './components/create-usuario/create-usuar
     MatIconModule,
     MatMenuModule,
     MatSidenavModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -7,10 +7,13 @@ import { AuditoriaComponent } from './components/auditoria/auditoria.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateIvaComponent } from './components/create-iva/create-iva.component';
 import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
+import { LoginComponent } from './components/login/login.component';
+
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'list-empleados', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'login', component: LoginComponent },
   { path: 'list-empleados', component: ListEmpleadosComponent },
   { path: 'create-empleado', component: CreateEmpleadoComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent },
