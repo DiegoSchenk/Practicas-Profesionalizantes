@@ -21,10 +21,15 @@ export class LoginComponent implements OnInit {
   ingresar(username: string, contrasena: string) { 
     
     this.firestore.collection('usuarios', ref => ref.where('usuario', '==', username)).valueChanges().subscribe((user: any) => {
-      console.log(user)
       if (user.length > 0 && user[0]['contrasena'] === contrasena) {
-       this.rolservice.setUser(user[0]) 
-       this.router.navigateByUrl('/list-empleados');
+      this.rolservice.setUser(user[0])
+      var rol = user[0]['codigo'];
+       if (rol === 3) {
+        this.router.navigateByUrl('/auditoria');
+       } else { if (rol === 4) {this.router.navigateByUrl('/usuarios');}
+          else {this.router.navigateByUrl('/list-empleados');}
+      }
+  
       } else {
           alert('Las credenciales de ingreso fueron incorrectas, vuelva a ingresarlas nuevamente.')
       }

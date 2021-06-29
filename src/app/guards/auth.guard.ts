@@ -13,8 +13,8 @@ export class AuthGuard implements CanActivate {
     [ ], //0
     ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','editUsuario/:id','situacioniva','auditoria','usuarios','create-usuarios','create-iva'],//  1: Supervisor.
     ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','situacioniva','create-iva'],//   2: Cliente.
-    ['', 'login', 'list-empleados','auditoria'],//   3: Auditor.
-    ['', 'login', 'list-empleados','editUsuario/:id','usuarios','create-usuarios',]//    4: Usuario. 
+    ['', 'login','auditoria'],//   3: Auditor.
+    ['', 'login','editUsuario/:id','usuarios','create-usuarios',]//    4: Usuario. 
   ]
 
   canActivate(
