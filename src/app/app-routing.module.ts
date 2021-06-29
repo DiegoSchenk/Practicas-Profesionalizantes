@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'situacioniva', component: SituacionIVAComponent},
   { path: 'auditoria', component: AuditoriaComponent},
   { path: 'usuarios', component: UsuariosComponent},
-  { path: 'create-usuario', component: CreateUsuarioComponent },
+  { path: 'create-usuarios', component: CreateUsuarioComponent },
   { path: 'create-iva', component: CreateIvaComponent },
   { path: '**', redirectTo: 'list-empleados', pathMatch: 'full' },
 ];
