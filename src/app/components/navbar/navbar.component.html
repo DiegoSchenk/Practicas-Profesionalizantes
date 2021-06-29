@@ -2,7 +2,7 @@
     <span class="navbar-brand mb-0 h1">APP SCHENK-SANCHEZ</span>
     <span class="example-spacer"></span>
     <button class="btn btn-dark float-right" routerLink= "/list-empleados">Clientes</button>
-    <button class="btn btn-dark float-right" routerLink= "/situacioniva">Situacion Frente al IVA</button>
+    <button class="btn btn-dark float-right" [ngIf]="!guard.canActivateLink('situacioniva') == true" routerLink= "/situacioniva">Situacion Frente al IVA</button>
     <button class="btn btn-dark float-right" routerLink= "/auditoria">Auditoria</button>
     <button class="btn btn-dark float-right" routerLink= "/usuarios">Usuarios</button>
     <span class="example-spacer"></span>

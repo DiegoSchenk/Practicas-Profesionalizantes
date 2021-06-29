@@ -12,7 +12,7 @@ export class RolService {
     this.user = usuario;
   }
 
-  getRol(){
+  getRol():number{
     return this.user['codigo']
   }
 
