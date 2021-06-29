@@ -1,0 +1,44 @@
+<mat-toolbar class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">APP SCHENK-SANCHEZ</span>
+    <span class="example-spacer"></span>
+    <button class="btn btn-dark float-right" routerLink= "/auditoria">Auditoria Clientes</button>
+    <button class="btn btn-dark float-right" routerLink= "/auditoria-iva">Auditoria Situacion Frente al IVA</button>
+    <span class="example-spacer"></span>
+    <button class="btn btn-dark btn-lg float-right example-icon favorite-icon" routerLink= "/login" arial-label="Example icon-button with heart icon">
+      <mat-icon>logout</mat-icon>
+    </button>
+  </mat-toolbar>
+  
+  <div class="container mt-4">
+      <div class="card">
+          <div class="card-body">
+              <span class="h4">Auditoria Situacion Frente al IVA</span>
+              <h5 style="margin-top: 30px;" *ngIf="auditoriaIVA.length == 0">No hay datos para mostrar</h5>
+              <table *ngIf="auditoriaIVA.length > 0" class="table table-striped mt-5">
+                  <thead>
+                    <tr>
+                      <th>Nº de Operacion</th>
+                      <th>Tipo de Operacion</th>
+                      <th>Usuario</th>
+                      <th>Terminal</th>
+                      <th>Fecha y Hora</th>
+                      <th>Codigo de IVA</th>
+                      <th>Descripcion</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let auditoriasIVA of auditoriaIVA">
+                      <td>{{ auditoriasIVA.nOperaciones }}</td>
+                      <td>{{ auditoriasIVA.tipoOperacion }}</td>
+                      <td>{{ auditoriasIVA.usuario }}</td>
+                      <td>{{ auditoriasIVA.terminal }}</td>
+                      <td>{{ auditoriasIVA.fechaYHora }}</td>
+                      <td>{{ auditoriasIVA.dni }}</td>
+                      <td>{{ auditoriasIVA.descripcion }}</td>
+                    </tr>
+                  </tbody>
+                </table>
+          </div>
+      </div>
+    </div>

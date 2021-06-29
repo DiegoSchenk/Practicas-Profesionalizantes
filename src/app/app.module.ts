@@ -29,6 +29,7 @@ import { CreateIvaComponent } from './components/create-iva/create-iva.component
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { LoginComponent } from './components/login/login.component';
     UsuariosComponent,
     CreateUsuarioComponent,
     LoginComponent,
+    AuditoriaIvaComponent,
   ],
   imports: [
     BrowserModule,
