@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { RolService } from 'src/app/services/rol.service';
 
 @Component({
   selector: 'app-create-empleado',
@@ -20,6 +21,7 @@ export class CreateEmpleadoComponent implements OnInit {
     private _empleadoService: EmpleadoService,
     private router: Router,
     private toastr: ToastrService,
+    private rol:RolService,
     private aRoute: ActivatedRoute) {
     this.createEmpleado = this.fb.group({
       nombre: ['', Validators.required],
@@ -39,6 +41,7 @@ export class CreateEmpleadoComponent implements OnInit {
   }
 
   agregarEditarEmpleado() {
+    if( this.rol.getRol() != 4){  
     this.submitted = true;
 
     if (this.createEmpleado.invalid) {
@@ -50,7 +53,7 @@ export class CreateEmpleadoComponent implements OnInit {
     } else {
       this.editarEmpleado(this.id);
     }
-
+    } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
   }
 
   agregarEmpleado() {
@@ -79,7 +82,6 @@ export class CreateEmpleadoComponent implements OnInit {
   }
 
   editarEmpleado(id: string) {
-
     const empleado: any = {
       nombre: this.createEmpleado.value.nombre,
       apellido: this.createEmpleado.value.apellido,
@@ -100,6 +102,7 @@ export class CreateEmpleadoComponent implements OnInit {
       })
       this.router.navigate(['/list-empleados']);
     })
+  
   }
 
 

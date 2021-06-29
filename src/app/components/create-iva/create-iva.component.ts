@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { RolService } from 'src/app/services/rol.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
+
 
 @Component({
   selector: 'app-create-iva',
@@ -21,6 +23,7 @@ export class CreateIvaComponent implements OnInit {
     private _situacionIVAService: SituacionesIVAService,
     private router: Router,
     private toastr: ToastrService,
+    private rol:RolService,
     private aRoute: ActivatedRoute) {
     this.createSituacionIVA = this.fb.group({
       codigo: ['', Validators.required],
@@ -36,7 +39,7 @@ export class CreateIvaComponent implements OnInit {
 
   agregarEditarSituacionIVA() {
     this.submitted = true;
-
+    if( this.rol.getRol() != 4){
     if (this.createSituacionIVA.invalid) {
       return;
     }
@@ -46,7 +49,7 @@ export class CreateIvaComponent implements OnInit {
     } else {
       this.editarSituacionIVA(this.id);
     }
-
+  } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
   }
 
   agregarSituacionIVA() {
