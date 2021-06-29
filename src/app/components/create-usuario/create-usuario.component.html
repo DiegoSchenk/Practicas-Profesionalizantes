@@ -1,1 +1,30 @@
-<p>create-usuario works!</p>
+<div class="container pt-4">
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3">
+            <div class="card text-center">
+                <div class="card-body">
+                    <span class= "h4">
+                        {{ titulo }}
+                        <div *ngIf="loading" class="spinner-border float-right" role="status">
+                            <span class="sr-only">Loading...</span>
+                          </div>
+                    </span>
+                    <span *ngIf="submitted && createUsuario.invalid" class="badge badge-danger">TODOS LOS CAMPOS SON OBLIGATORIOS</span>
+                    <form class="mt-4" [formGroup]="createUsuario" (ngSubmit)="agregarEditarUsuario()">
+                        <input type="number" class="form-control form-control-lg" formControlName="codigo"
+                                    placeholder="Codigo">
+                        <input type="text" class="form-control form-control-lg" formControlName="usuario"
+                                    placeholder="Usuario">
+                        <input type="text" class="form-control form-control-lg mt-3" formControlName="contrasena"
+                            placeholder="Contrasena">    
+                        <div class="mt-3">
+                            <button type="text" class="btn btn-secondary btn-lg mr-3"
+                                routerLink="/usuarios">Volver</button>
+                            <button type="submit" class="btn btn-dark btn-lg">Agregar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
