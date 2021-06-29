@@ -6,6 +6,8 @@ import { SituacionIVAComponent } from './components/situacion-iva/situacion-iva.
 import { AuditoriaComponent } from './components/auditoria/auditoria.component';
 import { UsuariosComponent } from './components/usuarios/usuarios.component';
 import { CreateIvaComponent } from './components/create-iva/create-iva.component';
+import { CreateUsuarioComponent } from './components/create-usuario/create-usuario.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'list-empleados', pathMatch: 'full' },
@@ -15,6 +17,7 @@ const routes: Routes = [
   { path: 'situacioniva', component: SituacionIVAComponent},
   { path: 'auditoria', component: AuditoriaComponent},
   { path: 'usuarios', component: UsuariosComponent},
+  { path: 'create-usuario', component: CreateUsuarioComponent },
   { path: 'create-iva', component: CreateIvaComponent },
   { path: '**', redirectTo: 'list-empleados', pathMatch: 'full' },
 ];
