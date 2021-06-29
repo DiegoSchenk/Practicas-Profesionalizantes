@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { EmpleadoService } from 'src/app/services/empleado.service';
+import { RolService } from 'src/app/services/rol.service';
 
 @Component({
   selector: 'app-list-empleados',
@@ -13,11 +14,13 @@ export class ListEmpleadosComponent implements OnInit {
   empleados: any[] = [];
 
   constructor(private _empleadoService: EmpleadoService,
-              private toastr: ToastrService) {
+              private toastr: ToastrService, private rol: RolService) {
   }
 
   ngOnInit(): void {
     this.getEmpleados()
+    //Asi se obtiene el rol
+    //console.log(this.rol.getRol())  
   }
 
   getEmpleados() {

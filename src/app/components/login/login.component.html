@@ -5,13 +5,13 @@
         <h1 class="h3 mb-3 fw-normal">Login</h1>
         <mat-form-field class="h3 mb-3 fw-normal" appearance="fill">
             <mat-label>Usuario</mat-label>
-            <input matInput>
+            <input matInput #usuario>
           </mat-form-field>
           <mat-form-field class="h3 mb-3 fw-normal" appearance="fill">
             <mat-label>Contraseña</mat-label>
-            <input matInput>
+            <input matInput #contrasena>
           </mat-form-field>
           <br>
-          <button (click)="ingresar()" class="ancho" mat-raised-button mat-button color="primary">Ingresar</button>
+          <button (click)="ingresar(usuario.value,contrasena.value)" class="ancho" mat-raised-button mat-button color="primary">Ingresar</button>
     </div>
 </div>
