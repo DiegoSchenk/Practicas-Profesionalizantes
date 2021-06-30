@@ -31,6 +31,8 @@ import { CreateUsuarioComponent } from './components/create-usuario/create-usuar
 import { LoginComponent } from './components/login/login.component';
 import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.component';
 import { RolService } from './services/rol.service';
+import { NgxPrintModule } from 'ngx-print';
+
 
 @NgModule({
   declarations: [
@@ -62,7 +64,8 @@ import { RolService } from './services/rol.service';
     MatSidenavModule,
     MatToolbarModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    NgxPrintModule
   ],
   providers: [RolService],
   bootstrap: [AppComponent]
