@@ -1,3 +1,4 @@
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
@@ -26,5 +27,10 @@ export class AuditoriaClientesService {
     //return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('numoprA', 'desc').limitToLast(1).subscribe((user: any) => {
     //}
   //}
+  getNumopr(): Observable<unknown[]> {
+    var numero:number;
+    numero = 0;
+    return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('numoprA', 'desc').limit(1)).valueChanges();
+  }
   
 }

@@ -97,7 +97,7 @@ export class ListEmpleadosComponent implements OnInit {
       })
     this._empleadoService.eliminarEmpleado(id).then(() => {
       const auditoriacliente: any = {
-        numoprA: 'Nombre',
+        numoprA: this._auditoriaService.getNumopr(),
         tipooprA: 'Baja',
         usuarioA: this.rol.getUsuario(),
         terminalA: this.ipAddress,
