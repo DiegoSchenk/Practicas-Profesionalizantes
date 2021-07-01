@@ -22,11 +22,6 @@ export class AuditoriaClientesService {
     return this.firestore.collection('auditoriaclientes').doc(id).update(data);
   }
 
-  //getMax(){
-    // this.firestore.collection('usuarios', ref => ref.where('usuario', '==', username)).valueChanges().subscribe((user: any) => {
-    //return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('numoprA', 'desc').limitToLast(1).subscribe((user: any) => {
-    //}
-  //}
   getNumopr(): Observable<unknown[]> {
     var numero:number;
     numero = 0;
