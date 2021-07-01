@@ -91,6 +91,7 @@ export class CreateEmpleadoComponent implements OnInit {
       fechaActualizacion: new Date()
     }
   
+    
     const auditoriacliente: any = {
       numoprA: 'Nombre',
       tipooprA: 'Alta',
@@ -98,7 +99,7 @@ export class CreateEmpleadoComponent implements OnInit {
       terminalA: this.ipAddress,
       fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
       dniA: this.createEmpleado.value.dni,
-      descA: 'Se ha creado el registro.',
+      descA: 'Se ha creado el registro: ' + this.createEmpleado.value.dni + '.',
     }
 
     this.loading = true;
