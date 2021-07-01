@@ -12,7 +12,7 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 })
 export class AuditoriaComponent implements OnInit {
 
-  auditoriaClientes: any[] = [];
+  auditoriaclientes: any[] = [];
 
   constructor(private _auditoriaClientesService: AuditoriaClientesService,
               private toastr: ToastrService) {
@@ -24,14 +24,14 @@ export class AuditoriaComponent implements OnInit {
 
   getAuditoriaClientes() {
     this._auditoriaClientesService.getAuditoriaClientes().subscribe(data => {
-      this.auditoriaClientes = [];
+      this.auditoriaclientes = [];
       data.forEach((element: any) => {
-        this.auditoriaClientes.push({
+        this.auditoriaclientes.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
       });
-      console.log(this.auditoriaClientes);
+      console.log(this.auditoriaclientes);
     });
   }
 
