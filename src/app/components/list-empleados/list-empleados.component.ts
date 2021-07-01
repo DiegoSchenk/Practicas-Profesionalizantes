@@ -23,12 +23,14 @@ export class ListEmpleadosComponent implements OnInit {
   empleados: any[] = [];
   createEmpleado: FormGroup;
   fileName= 'Clientes.xlsx';
+  ipAddress:any
 
   constructor(private fb: FormBuilder,
               private _empleadoService: EmpleadoService,
               private excelService: ExcelService,
               private toastr: ToastrService, 
               private _auditoriaService: AuditoriaClientesService,
+              private http:HttpClient,
               private rol: RolService) {
               this.createEmpleado = this.fb.group({
                 nombre: ['', Validators.required],
@@ -38,6 +40,11 @@ export class ListEmpleadosComponent implements OnInit {
                 celular: ['', Validators.required],
                 ciudad: ['', Validators.required],
                 iva:['', Validators.required]
+              })
+              this.http.get<{ip:string}>('https://jsonip.com')
+              .subscribe( data => {
+              console.log('th data', data);
+              this.ipAddress = data.ip
               })
   }
 
@@ -93,7 +100,7 @@ export class ListEmpleadosComponent implements OnInit {
         numoprA: 'Nombre',
         tipooprA: 'Baja',
         usuarioA: this.rol.getUsuario(),
-        terminalA: 'this.ipAddress,',
+        terminalA: this.ipAddress,
         fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
         dniA: this.createEmpleado.value.dni,
         descA: 'Se ha eliminado el registro: ' + this.createEmpleado.value.dni + '.',

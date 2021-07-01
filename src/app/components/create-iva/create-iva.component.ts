@@ -90,7 +90,7 @@ export class CreateIvaComponent implements OnInit {
         numoprA: 'Nombre',
         tipooprA: 'Alta',
         usuarioA: this.rol.getUsuario(),
-        terminalA: 'this.ipAddress',
+        terminalA: this.ipAddress,
         fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
         codigoA: this.createSituacionIVA.value.codigo,
         descA: 'Se ha creado el registro.',
@@ -119,7 +119,7 @@ export class CreateIvaComponent implements OnInit {
         numoprA: 'Nombre',
         tipooprA: 'Modificacion',
         usuarioA: this.rol.getUsuario(),
-        terminalA: 'this.ipAddress',
+        terminalA: this.ipAddress,
         fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
         codigoA: this.createSituacionIVA.value.codigo,
         descA: 'Se ha modificado el registro: ' + this.createSituacionIVA.value.codigo +'.'

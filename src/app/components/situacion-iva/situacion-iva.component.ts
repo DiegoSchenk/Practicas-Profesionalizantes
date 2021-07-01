@@ -7,6 +7,7 @@ import { RolService } from 'src/app/services/rol.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import * as XLSX from 'xlsx'; 
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -18,15 +19,22 @@ export class SituacionIVAComponent implements OnInit {
   situacionesIVA: any[] = [];
   fileName= 'SituacionesDeIVA.xlsx';
   createSituacionIVA: FormGroup;
+  ipAddress:any;
 
   constructor(private fb: FormBuilder,
               private _situacionIVAService: SituacionesIVAService,
               private _auditoriaService: AuditoriaIVAService,
+              private http:HttpClient,
               private toastr: ToastrService, private rol:RolService) {
                 this.createSituacionIVA = this.fb.group({
                   codigo: ['', Validators.required],
                   descripcion: ['', Validators.required]
                 })
+                this.http.get<{ip:string}>('https://jsonip.com')
+              .subscribe( data => {
+              console.log('th data', data);
+              this.ipAddress = data.ip
+              })
   }
 
   ngOnInit(): void {
@@ -75,7 +83,7 @@ export class SituacionIVAComponent implements OnInit {
         numoprA: 'Nombre',
         tipooprA: 'Baja',
         usuarioA: this.rol.getUsuario(),
-        terminalA: 'this.ipAddress',
+        terminalA: this.ipAddress,
         fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
         codigoA: this.createSituacionIVA.value.codigo,
         descA: 'Se ha eliminado el registro.',
