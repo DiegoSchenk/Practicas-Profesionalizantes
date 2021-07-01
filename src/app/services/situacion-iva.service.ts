@@ -14,7 +14,7 @@ export class SituacionesIVAService {
   }
 
   getSituacionesIVA(): Observable<any> {
-    return this.firestore.collection('situaciones-iva', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
+    return this.firestore.collection('situaciones-iva', ref => ref.orderBy('codigo', 'asc')).snapshotChanges();
   }
 
   eliminarSituacionIVA(id: string): Promise<any> {
