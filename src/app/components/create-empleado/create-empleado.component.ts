@@ -6,6 +6,7 @@ import { AuditoriaClientesService } from 'src/app/services/auditoria-clientes.se
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
 import { HttpClient } from '@angular/common/http';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-create-empleado',
@@ -94,8 +95,8 @@ export class CreateEmpleadoComponent implements OnInit {
       numoprA: 'Nombre',
       tipooprA: 'Alta',
       usuarioA: this.rol.getUsuario(),
-      terminalA: this.ipAddress,//ipadress,
-      fechahoraA: new Date(),
+      terminalA: this.ipAddress,
+      fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
       dniA: this.createEmpleado.value.dni,
       descA: 'Se ha creado el registro.',
     }
