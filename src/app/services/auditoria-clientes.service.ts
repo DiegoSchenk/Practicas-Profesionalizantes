@@ -14,7 +14,7 @@ export class AuditoriaClientesService {
   }
 
   getAuditoriaClientes(): Observable<any> {
-    return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
+    return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('fechahoraA', 'asc')).snapshotChanges();
   }
 
   actualizarAuditoriaClientes(id: string, data:any): Promise<any> {
