@@ -92,22 +92,22 @@ export class CreateEmpleadoComponent implements OnInit {
     }
   
     
-    const auditoriacliente: any = {
-      numoprA: 'Nombre',
-      tipooprA: 'Alta',
-      usuarioA: this.rol.getUsuario(),
-      terminalA: this.ipAddress,
-      fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
-      dniA: this.createEmpleado.value.dni,
-      descA: 'Se ha creado el registro: ' + this.createEmpleado.value.dni + '.',
-    }
 
     this.loading = true;
-    this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
     this._empleadoService.agregarEmpleado(empleado).then(() => {
       this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
         positionClass: 'toast-bottom-right'
       });
+      const auditoriacliente: any = {
+        numoprA: 'Nombre',
+        tipooprA: 'Alta',
+        usuarioA: this.rol.getUsuario(),
+        terminalA: 'this.ipAddress,',
+        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
+        dniA: this.createEmpleado.value.dni,
+        descA: 'Se ha creado el registro: ' + this.createEmpleado.value.dni + '.',
+      }
+      this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
       this.loading = false;
       this.router.navigate(['/list-empleados']);
     }).catch(error => {
@@ -131,6 +131,16 @@ export class CreateEmpleadoComponent implements OnInit {
     this.loading = true;
 
     this._empleadoService.actualizarEmpleado(id, empleado).then(() => {
+      const auditoriacliente: any = {
+        numoprA: 'Nombre',
+        tipooprA: 'Modificacion',
+        usuarioA: this.rol.getUsuario(),
+        terminalA: 'this.ipAddress',
+        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
+        dniA: this.createEmpleado.value.dni,
+        descA: 'Se ha modificado el registro: ' + this.createEmpleado.value.dni + '.',
+      }
+      this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
       this.loading = false;
       this.toastr.info('El cliente fue modificado con exito', 'Cliente modificado', {
         positionClass: 'toast-bottom-right'

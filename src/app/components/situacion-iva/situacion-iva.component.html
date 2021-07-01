@@ -17,7 +17,7 @@
             <button class="btn btn-dark btn-lg float-right" routerLink="/create-iva">Agregar</button>
             <div id=h21>
             <h5 style="margin-top: 30px;" *ngIf="situacionesIVA.length == 0">No hay datos para mostrar</h5>
-            <table *ngIf="situacionesIVA.length > 0" class="table table-striped mt-5">
+            <table id="excel-table" *ngIf="situacionesIVA.length > 0" class="table table-striped mt-5">
                 <thead>
                   <tr>
                     <th>Codigo</th>
@@ -37,7 +37,10 @@
               </table>
             </div>
         </div>
-        <div><button printSectionId="h21" class="btn btn-dark btn-lg float-right example-icon favorite-icon"  ngxPrint><mat-icon>print</mat-icon></button> </div>
+        <div>
+          <button printSectionId="h21" class="btn btn-dark btn-lg float-right example-icon favorite-icon"  ngxPrint><mat-icon>print</mat-icon></button> 
+          <button  style = "background-color:rgb(28, 117, 28)" class ="btn btn-dark btn-lg float-right example-icon favorite-icon" (click)="exportexcel()"><mat-icon>insert_drive_file</mat-icon></button> 
+        </div>
     </div>
   </div>
 

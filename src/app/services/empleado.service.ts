@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class EmpleadoService {
-
   constructor(private firestore: AngularFirestore) { }
 
   agregarEmpleado(empleado: any): Promise<any> {

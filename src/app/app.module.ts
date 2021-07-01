@@ -33,6 +33,7 @@ import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.
 import { RolService } from './services/rol.service';
 import { NgxPrintModule } from 'ngx-print';
 import { HttpClientModule } from "@angular/common/http";
+import { ExcelService } from './services/excel.service';
 
 @NgModule({
   declarations: [
@@ -68,7 +69,7 @@ import { HttpClientModule } from "@angular/common/http";
     NgxPrintModule,
     HttpClientModule
   ],
-  providers: [RolService],
+  providers: [RolService, ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
