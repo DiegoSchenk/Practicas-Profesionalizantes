@@ -84,7 +84,7 @@ export class CreateEmpleadoComponent implements OnInit {
     }
     //var ipadress:any = this.ipservice.getIPAddress().subscribe((res:any)=>{ ipadress=res.ip}); 
     //console.log(ipadress + ' esta es la ip');
-    const auditoria: any = {
+    const auditoriacliente: any = {
       numoprA: 'Nombre',
       tipooprA: 'Alta',
       usuarioA: this.rol.getUsuario(),
@@ -95,7 +95,7 @@ export class CreateEmpleadoComponent implements OnInit {
     }
 
     this.loading = true;
-    this._auditoriaService.agregarAuditoriaClientes(auditoriacliente)
+    this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
     this._empleadoService.agregarEmpleado(empleado).then(() => {
       this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
         positionClass: 'toast-bottom-right'
