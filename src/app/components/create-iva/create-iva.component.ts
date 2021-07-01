@@ -86,18 +86,21 @@ export class CreateIvaComponent implements OnInit {
       this.toastr.success('La situacion de IVA fue registrada con exito!', 'Situacion de IVA Registrada', {
         positionClass: 'toast-bottom-right'
       });
-      const auditoriaIVA: any = {
-        numoprA: 'Nombre',
-        tipooprA: 'Alta',
-        usuarioA: this.rol.getUsuario(),
-        terminalA: this.ipAddress,
-        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
-        codigoA: this.createSituacionIVA.value.codigo,
-        descA: 'Se ha creado el registro.',
-      }
-      this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
-      this.loading = false;
-      this.router.navigate(['/situacioniva']);
+      const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
+          const auditoriaIVA: any = {
+            numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
+            tipooprA: 'Alta',
+            usuarioA: this.rol.getUsuario(),
+            terminalA: this.ipAddress,
+            fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
+            codigoA: this.createSituacionIVA.value.codigo,
+            descA: 'Se ha creado el registro.',
+          }
+          this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
+          this.loading = false;
+          audit_subs.unsubscribe();
+          this.router.navigate(['/situacioniva']);
+        })    
     }).catch(error => {
       console.log(error);
       this.loading = false;
@@ -115,21 +118,25 @@ export class CreateIvaComponent implements OnInit {
     this.loading = true;
 
     this._situacionIVAService.actualizarSituacionIVA(id, situacionIVA).then(() => {
-      const auditoriaIVA: any = {
-        numoprA: 'Nombre',
-        tipooprA: 'Modificacion',
-        usuarioA: this.rol.getUsuario(),
-        terminalA: this.ipAddress,
-        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
-        codigoA: this.createSituacionIVA.value.codigo,
-        descA: 'Se ha modificado el registro: ' + this.createSituacionIVA.value.codigo +'.'
-      }
-      this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
-      this.loading = false;
+      const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
+        const auditoriaIVA: any = {
+          numoprA: 'Nombre',
+          tipooprA: 'Modificacion',
+          usuarioA: this.rol.getUsuario(),
+          terminalA: this.ipAddress,
+          fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
+          codigoA: this.createSituacionIVA.value.codigo,
+          descA: 'Se ha modificado el registro: ' + this.createSituacionIVA.value.codigo +'.'
+        }
+        this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
+        this.loading = false;
+        audit_subs.unsubscribe();
+        
+        this.router.navigate(['/situacioniva']);
+      })
       this.toastr.info('La situacion de IVA fue modificada con exito', 'Situacion de IVA modificada', {
         positionClass: 'toast-bottom-right'
       })
-      this.router.navigate(['/situacioniva']);
     })
   }
 

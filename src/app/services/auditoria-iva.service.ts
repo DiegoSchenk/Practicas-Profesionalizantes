@@ -21,4 +21,9 @@ export class AuditoriaIVAService {
     return this.firestore.collection('auditoriaIVA').doc(id).update(data);
   }
 
+  getNumopr(): Observable<unknown[]> {
+    var numero:number;
+    numero = 0;
+    return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('numoprA', 'desc').limit(1)).valueChanges();
+  }
 }

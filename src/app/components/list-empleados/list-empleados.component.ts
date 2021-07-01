@@ -108,12 +108,13 @@ export class ListEmpleadosComponent implements OnInit {
           }
           this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
           audit_subs.unsubscribe();
+          this.toastr.error('El cliente fue eliminado con exito', 'Registro eliminado!', {
+            positionClass: 'toast-bottom-right'
+          });
       }).catch(error => {
         console.log(error);
       })
-      this.toastr.error('El cliente fue eliminado con exito', 'Registro eliminado!', {
-        positionClass: 'toast-bottom-right'
-      });
+      
     })
     } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
   

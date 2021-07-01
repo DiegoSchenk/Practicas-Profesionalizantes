@@ -79,22 +79,26 @@ export class SituacionIVAComponent implements OnInit {
         })
       })
     this._situacionIVAService.eliminarSituacionIVA(id).then(() => {
-      const auditoriaIVA: any = {
-        numoprA: 'Nombre',
-        tipooprA: 'Baja',
-        usuarioA: this.rol.getUsuario(),
-        terminalA: this.ipAddress,
-        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
-        codigoA: this.createSituacionIVA.value.codigo,
-        descA: 'Se ha eliminado el registro.',
-      }
-      this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
-      this.toastr.error('La situacion de IVA fue eliminada con exito', 'Registro eliminado!', {
-        positionClass: 'toast-bottom-right'
-      });
-    }).catch(error => {
-      console.log(error);
-    })
+      const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
+          const auditoriaIVA: any = {
+            numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
+            tipooprA: 'Baja',
+            usuarioA: this.rol.getUsuario(),
+            terminalA: this.ipAddress,
+            fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
+            codigoA: this.createSituacionIVA.value.codigo,
+            descA: 'Se ha eliminado el registro.',
+          }
+          this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
+          audit_subs.unsubscribe();
+          this.toastr.error('La situacion de IVA fue eliminada con exito', 'Registro eliminado!', {
+            positionClass: 'toast-bottom-right'
+          });
+        })  
+        }).catch(error => {
+          console.log(error);
+        })
+      
   } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
   }
 
