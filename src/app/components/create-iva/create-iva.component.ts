@@ -4,7 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { RolService } from 'src/app/services/rol.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
-
+import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 
 @Component({
   selector: 'app-create-iva',
@@ -14,6 +14,7 @@ import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 export class CreateIvaComponent implements OnInit {
   
   createSituacionIVA: FormGroup;
+  createAuditoria: FormGroup;
   submitted = false;
   loading = false;
   id: string | null;
@@ -21,6 +22,7 @@ export class CreateIvaComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _situacionIVAService: SituacionesIVAService,
+    private _auditoriaService: AuditoriaIVAService,
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
@@ -28,6 +30,15 @@ export class CreateIvaComponent implements OnInit {
     this.createSituacionIVA = this.fb.group({
       codigo: ['', Validators.required],
       descripcion: ['', Validators.required]
+    })
+    this.createAuditoria = this.fb.group({
+      numoprA: ['', Validators.required],
+      tipooprA: ['', Validators.required],
+      usuarioA: ['', Validators.required],
+      terminalA : ['', Validators.required],
+      fechahoraA : ['', Validators.required],
+      codigoA: ['', Validators.required],
+      descA: ['', Validators.required]
     })
     this.id = this.aRoute.snapshot.paramMap.get('id');
     console.log(this.id)
@@ -59,13 +70,23 @@ export class CreateIvaComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
+    const auditoriaIVA: any = {
+      numoprA: 'Nombre',
+      tipooprA: 'Alta',
+      usuarioA: this.rol.getUsuario(),
+      terminalA: 'en progreso',//ipadress,
+      fechahoraA: new Date(),
+      codigoA: this.createSituacionIVA.value.codigo,
+      descA: 'Se ha creado el registro.',
+    }
     this.loading = true;
+    this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
     this._situacionIVAService.agregarSituacionIVA(situacionIVA).then(() => {
       this.toastr.success('La situacion de IVA fue registrada con exito!', 'Situacion de IVA Registrada', {
         positionClass: 'toast-bottom-right'
       });
       this.loading = false;
-      this.router.navigate(['/situacion-iva']);
+      this.router.navigate(['/situacioniva']);
     }).catch(error => {
       console.log(error);
       this.loading = false;
@@ -87,7 +108,7 @@ export class CreateIvaComponent implements OnInit {
       this.toastr.info('La situacion de IVA fue modificada con exito', 'Situacion de IVA modificada', {
         positionClass: 'toast-bottom-right'
       })
-      this.router.navigate(['/situacion-iva']);
+      this.router.navigate(['/situacioniva']);
     })
   }
 
