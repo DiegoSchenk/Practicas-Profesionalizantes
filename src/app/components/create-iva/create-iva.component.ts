@@ -120,7 +120,7 @@ export class CreateIvaComponent implements OnInit {
     this._situacionIVAService.actualizarSituacionIVA(id, situacionIVA).then(() => {
       const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
         const auditoriaIVA: any = {
-          numoprA: 'Nombre',
+          numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
           tipooprA: 'Modificacion',
           usuarioA: this.rol.getUsuario(),
           terminalA: this.ipAddress,
