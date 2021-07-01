@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
+import { AuditoriaClientesService } from 'src/app/services/auditoria-clientes.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
 
@@ -12,6 +13,7 @@ import { RolService } from 'src/app/services/rol.service';
 })
 export class CreateEmpleadoComponent implements OnInit {
   createEmpleado: FormGroup;
+  createAuditoria: FormGroup;
   submitted = false;
   loading = false;
   id: string | null;
@@ -19,6 +21,7 @@ export class CreateEmpleadoComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _empleadoService: EmpleadoService,
+    private _auditoriaService: AuditoriaClientesService,
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
@@ -31,6 +34,15 @@ export class CreateEmpleadoComponent implements OnInit {
       celular: ['', Validators.required],
       ciudad: ['', Validators.required],
       iva:['', Validators.required]
+    })
+    this.createAuditoria = this.fb.group({
+      numoprA: ['', Validators.required],
+      tipooprA: ['', Validators.required],
+      usuarioA: ['', Validators.required],
+      terminalA : ['', Validators.required],
+      fechahoraA : ['', Validators.required],
+      dniA: ['', Validators.required],
+      descA: ['', Validators.required]
     })
     this.id = this.aRoute.snapshot.paramMap.get('id');
     console.log(this.id)
@@ -68,7 +80,18 @@ export class CreateEmpleadoComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
+    const auditoria: any = {
+      numoprA: this.createEmpleado.value.nombre,
+      tipooprA: 'Alta',
+      usuarioA: this.rol.getUsuario(),
+      terminalA: 'ip',
+      fechahoraA: new Date(),
+      dniA: this.createEmpleado.value.dni,
+      descA: 'Se ha creado el registro.',
+    }
+
     this.loading = true;
+    this._auditoriaService.agregarAuditoriaClientes(auditoria)
     this._empleadoService.agregarEmpleado(empleado).then(() => {
       this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
         positionClass: 'toast-bottom-right'

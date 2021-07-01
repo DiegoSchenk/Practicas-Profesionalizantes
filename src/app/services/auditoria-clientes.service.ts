@@ -9,7 +9,7 @@ export class AuditoriaClientesService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  agregarAuditoriaClientes(auditoriaClientes: any): Promise<any> {
+  agregarAuditoriaClientes(auditoriaClientes: any): Promise<any> {         
     return this.firestore.collection('auditoriaClientes').add(auditoriaClientes);
   }
 
