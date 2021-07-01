@@ -5,7 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuditoriaClientesService } from 'src/app/services/auditoria-clientes.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
-import { IpServiceService } from 'src/app/services/ip-service.service';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-create-empleado',
@@ -19,6 +19,7 @@ export class CreateEmpleadoComponent implements OnInit {
   loading = false;
   id: string | null;
   titulo = 'Agregar Cliente';
+  ipAddress:any
 
   constructor(private fb: FormBuilder,
     private _empleadoService: EmpleadoService,
@@ -26,7 +27,7 @@ export class CreateEmpleadoComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
-    private ipservice:IpServiceService,
+    private http: HttpClient,
     private aRoute: ActivatedRoute) {
     this.createEmpleado = this.fb.group({
       nombre: ['', Validators.required],
@@ -45,6 +46,12 @@ export class CreateEmpleadoComponent implements OnInit {
       fechahoraA : ['', Validators.required],
       dniA: ['', Validators.required],
       descA: ['', Validators.required]
+    })
+
+    this.http.get<{ip:string}>('https://jsonip.com')
+    .subscribe( data => {
+      console.log('th data', data);
+      this.ipAddress = data.ip
     })
     this.id = this.aRoute.snapshot.paramMap.get('id');
     console.log(this.id)
@@ -82,13 +89,12 @@ export class CreateEmpleadoComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
-    //var ipadress:any = this.ipservice.getIPAddress().subscribe((res:any)=>{ ipadress=res.ip}); 
-    //console.log(ipadress + ' esta es la ip');
+  
     const auditoriacliente: any = {
       numoprA: 'Nombre',
       tipooprA: 'Alta',
       usuarioA: this.rol.getUsuario(),
-      terminalA: 'en progreso',//ipadress,
+      terminalA: this.ipAddress,//ipadress,
       fechahoraA: new Date(),
       dniA: this.createEmpleado.value.dni,
       descA: 'Se ha creado el registro.',
