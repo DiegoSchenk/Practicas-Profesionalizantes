@@ -140,8 +140,8 @@ export class CreateEmpleadoComponent implements OnInit {
 
 
   esEditar() {
-    this.titulo = 'Editar Cliente'
     if (this.id !== null) {
+      this.titulo = 'Editar Cliente'
       this.loading = true;
       this._empleadoService.getEmpleado(this.id).subscribe(data => {
         this.loading = false;

@@ -5,6 +5,8 @@ import { ToastrService } from 'ngx-toastr';
 import { RolService } from 'src/app/services/rol.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
+import { IvyParser } from '@angular/compiler';
+import { Input } from '@angular/core';
 
 @Component({
   selector: 'app-create-iva',
@@ -114,8 +116,8 @@ export class CreateIvaComponent implements OnInit {
 
 
   esEditar() {
-    this.titulo = 'Editar Situacion de IVA'
     if (this.id !== null) {
+      this.titulo = 'Editar Situacion de IVA'
       this.loading = true;
       this._situacionIVAService.getSituacionIVA(this.id).subscribe(data => {
         this.loading = false;
