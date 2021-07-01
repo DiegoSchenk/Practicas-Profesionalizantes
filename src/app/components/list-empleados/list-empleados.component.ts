@@ -95,26 +95,28 @@ export class ListEmpleadosComponent implements OnInit {
           iva: data.payload.data()['iva']
         })
       })
-    this._empleadoService.eliminarEmpleado(id).then(() => {
-      const auditoriacliente: any = {
-        numoprA: 'Nombre',
-        tipooprA: 'Baja',
-        usuarioA: this.rol.getUsuario(),
-        terminalA: this.ipAddress,
-        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
-        dniA: this.createEmpleado.value.dni,
-        descA: 'Se ha eliminado el registro: ' + this.createEmpleado.value.dni + '.',
-      }
-      this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
-      
+    const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{  
+        this._empleadoService.eliminarEmpleado(id).then(() => {
+          const auditoriacliente: any = {
+            numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
+            tipooprA: 'Baja',
+            usuarioA: this.rol.getUsuario(),
+            terminalA: this.ipAddress,
+            fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
+            dniA: this.createEmpleado.value.dni,
+            descA: 'Se ha eliminado el registro: ' + this.createEmpleado.value.dni + '.',
+          }
+          this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
+          audit_subs.unsubscribe();
+      }).catch(error => {
+        console.log(error);
+      })
       this.toastr.error('El cliente fue eliminado con exito', 'Registro eliminado!', {
         positionClass: 'toast-bottom-right'
       });
-    }).catch(error => {
-      console.log(error);
     })
     } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
-
+  
   }
 
 
