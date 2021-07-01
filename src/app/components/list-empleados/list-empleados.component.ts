@@ -95,8 +95,8 @@ export class ListEmpleadosComponent implements OnInit {
           iva: data.payload.data()['iva']
         })
       })
-    const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{  
-        this._empleadoService.eliminarEmpleado(id).then(() => {
+      this._empleadoService.eliminarEmpleado(id).then(() => {
+        const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{  
           const auditoriacliente: any = {
             numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
             tipooprA: 'Baja',
@@ -111,11 +111,10 @@ export class ListEmpleadosComponent implements OnInit {
           this.toastr.error('El cliente fue eliminado con exito', 'Registro eliminado!', {
             positionClass: 'toast-bottom-right'
           });
+        })    
       }).catch(error => {
         console.log(error);
       })
-      
-    })
     } else {alert('No tienes los privilegios para ejecutar esta Acción.')}
   
   }
