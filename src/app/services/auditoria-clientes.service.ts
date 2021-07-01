@@ -9,16 +9,16 @@ export class AuditoriaClientesService {
 
   constructor(private firestore: AngularFirestore) { }
 
-  agregarAuditoriaClientes(auditoriaClientes: any): Promise<any> {         
-    return this.firestore.collection('auditoriaClientes').add(auditoriaClientes);
+  agregarAuditoriaClientes(auditoriacliente: any): Promise<any> {         
+    return this.firestore.collection('auditoriaclientes').add(auditoriacliente);
   }
 
   getAuditoriaClientes(): Observable<any> {
-    return this.firestore.collection('auditoriaClientes', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
+    return this.firestore.collection('auditoriaclientes', ref => ref.orderBy('fechaCreacion', 'asc')).snapshotChanges();
   }
 
   actualizarAuditoriaClientes(id: string, data:any): Promise<any> {
-    return this.firestore.collection('auditoriaClientes').doc(id).update(data);
+    return this.firestore.collection('auditoriaclientes').doc(id).update(data);
   }
 
 }

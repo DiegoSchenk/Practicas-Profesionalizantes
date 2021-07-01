@@ -13,8 +13,8 @@
     <div class="card">
         <div class="card-body">
             <span class="h4">Auditoria de Clientes</span>
-            <h5 style="margin-top: 30px;" *ngIf="auditoriaClientes.length == 0">No hay datos para mostrar</h5>
-            <table *ngIf="auditoriaClientes.length > 0" class="table table-striped mt-5">
+            <h5 style="margin-top: 30px;" *ngIf="auditoriaclientes.length == 0">No hay datos para mostrar</h5>
+            <table *ngIf="auditoriaclientes.length > 0" class="table table-striped mt-5">
                 <thead>
                   <tr>
                     <th>Nº de Operacion</th>
@@ -28,14 +28,14 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let auditoriaCliente of auditoriaClientes">
-                    <td>{{ auditoriaCliente.nOperaciones }}</td>
-                    <td>{{ auditoriaCliente.tipoOperacion }}</td>
-                    <td>{{ auditoriaCliente.usuario }}</td>
-                    <td>{{ auditoriaCliente.terminal }}</td>
-                    <td>{{ auditoriaCliente.fechaYHora }}</td>
-                    <td>{{ auditoriaCliente.dni }}</td>
-                    <td>{{ auditoriaCliente.descripcion }}</td>
+                  <tr *ngFor="let auditoriacliente of auditoriaclientes">
+                    <td>{{ auditoriacliente.numoprA }}</td>
+                    <td>{{ auditoriacliente.tipooprA }}</td>
+                    <td>{{ auditoriacliente.usuarioA }}</td>
+                    <td>{{ auditoriacliente.terminalA }}</td>
+                    <td>{{ auditoriacliente.fechahoraA }}</td>
+                    <td>{{ auditoriacliente.dniA }}</td>
+                    <td>{{ auditoriacliente.descA }}</td>
                   </tr>
                 </tbody>
               </table>

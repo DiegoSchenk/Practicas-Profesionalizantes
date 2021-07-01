@@ -80,7 +80,7 @@ export class CreateEmpleadoComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
-    const auditoria: any = {
+    const auditoriacliente: any = {
       numoprA: this.createEmpleado.value.nombre,
       tipooprA: 'Alta',
       usuarioA: this.rol.getUsuario(),
@@ -91,7 +91,7 @@ export class CreateEmpleadoComponent implements OnInit {
     }
 
     this.loading = true;
-    this._auditoriaService.agregarAuditoriaClientes(auditoria)
+    this._auditoriaService.agregarAuditoriaClientes(auditoriacliente)
     this._empleadoService.agregarEmpleado(empleado).then(() => {
       this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
         positionClass: 'toast-bottom-right'
