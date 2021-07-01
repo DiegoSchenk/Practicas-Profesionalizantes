@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RolService } from 'src/app/services/rol.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import * as XLSX from 'xlsx'; 
+import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 
 
 @Component({
@@ -15,9 +17,16 @@ import * as XLSX from 'xlsx';
 export class SituacionIVAComponent implements OnInit {
   situacionesIVA: any[] = [];
   fileName= 'SituacionesDeIVA.xlsx';
+  createSituacionIVA: FormGroup;
 
-  constructor(private _situacionesIVAService: SituacionesIVAService,
+  constructor(private fb: FormBuilder,
+              private _situacionIVAService: SituacionesIVAService,
+              private _auditoriaService: AuditoriaIVAService,
               private toastr: ToastrService, private rol:RolService) {
+                this.createSituacionIVA = this.fb.group({
+                  codigo: ['', Validators.required],
+                  descripcion: ['', Validators.required]
+                })
   }
 
   ngOnInit(): void {
@@ -40,7 +49,7 @@ export class SituacionIVAComponent implements OnInit {
   }
 
   getSituacionesIVA() {
-    this._situacionesIVAService.getSituacionesIVA().subscribe(data => {
+    this._situacionIVAService.getSituacionesIVA().subscribe(data => {
       this.situacionesIVA = [];
       data.forEach((element: any) => {
         this.situacionesIVA.push({
@@ -54,8 +63,24 @@ export class SituacionIVAComponent implements OnInit {
 
   eliminarSituacionIVA(id: string) {
     if( this.rol.getRol() != 4){
-    this._situacionesIVAService.eliminarSituacionIVA(id).then(() => {
-      console.log('Situacion de IVA eliminada con exito');
+      
+      this._situacionIVAService.getSituacionIVA(id).subscribe(data => {
+        this.createSituacionIVA.setValue({
+          codigo: data.payload.data()['codigo'],
+          descripcion: data.payload.data()['descripcion']
+        })
+      })
+    this._situacionIVAService.eliminarSituacionIVA(id).then(() => {
+      const auditoriaIVA: any = {
+        numoprA: 'Nombre',
+        tipooprA: 'Baja',
+        usuarioA: this.rol.getUsuario(),
+        terminalA: 'this.ipAddress',
+        fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
+        codigoA: this.createSituacionIVA.value.codigo,
+        descA: 'Se ha eliminado el registro.',
+      }
+      this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
       this.toastr.error('La situacion de IVA fue eliminada con exito', 'Registro eliminado!', {
         positionClass: 'toast-bottom-right'
       });
