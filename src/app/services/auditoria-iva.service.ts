@@ -14,7 +14,7 @@ export class AuditoriaIVAService {
   }
 
   getAuditoriaIVA(): Observable<any> {
-    return this.firestore.collection('auditoriaIVA', ref => ref.orderBy('fechahoraA', 'desc')).snapshotChanges();
+    return this.firestore.collection('auditoriaIVA', ref => ref.orderBy('numoprA', 'desc')).snapshotChanges();
   }
 
   actualizarAuditoriaIVAs(id: string, data:any): Promise<any> {
