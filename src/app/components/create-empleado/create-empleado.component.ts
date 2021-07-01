@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AuditoriaClientesService } from 'src/app/services/auditoria-clientes.service';
 import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
+import { IpServiceService } from 'src/app/services/ip-service.service';
 
 @Component({
   selector: 'app-create-empleado',
@@ -25,6 +26,7 @@ export class CreateEmpleadoComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
+    private ipservice:IpServiceService,
     private aRoute: ActivatedRoute) {
     this.createEmpleado = this.fb.group({
       nombre: ['', Validators.required],
@@ -80,11 +82,13 @@ export class CreateEmpleadoComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
+    //var ipadress:any = this.ipservice.getIPAddress().subscribe((res:any)=>{ ipadress=res.ip}); 
+    //console.log(ipadress + ' esta es la ip');
     const auditoria: any = {
-      numoprA: this.createEmpleado.value.nombre,
+      numoprA: 'Nombre',
       tipooprA: 'Alta',
       usuarioA: this.rol.getUsuario(),
-      terminalA: 'ip',
+      terminalA: 'en progreso',//ipadress,
       fechahoraA: new Date(),
       dniA: this.createEmpleado.value.dni,
       descA: 'Se ha creado el registro.',

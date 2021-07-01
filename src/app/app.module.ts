@@ -32,7 +32,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.component';
 import { RolService } from './services/rol.service';
 import { NgxPrintModule } from 'ngx-print';
-
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -65,7 +65,8 @@ import { NgxPrintModule } from 'ngx-print';
     MatToolbarModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxPrintModule
+    NgxPrintModule,
+    HttpClientModule
   ],
   providers: [RolService],
   bootstrap: [AppComponent]
