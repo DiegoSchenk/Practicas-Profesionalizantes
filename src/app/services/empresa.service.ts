@@ -1,4 +1,6 @@
 import { Injectable } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -6,10 +8,14 @@ import { Injectable } from '@angular/core';
 export class EmpresaService {
 
   empresa: any
-  constructor() {}
+  constructor(private firestore: AngularFirestore) { }
 
   setEmpresa(usuario:any){
     this.empresa = usuario;
+  }
+
+  getEmpresa(): Observable<any> {
+    return this.firestore.collection('empresas', ref => ref.orderBy('nombre', 'asc')).snapshotChanges();
   }
 
   getNombre():number{

@@ -1,22 +1,14 @@
 <mat-toolbar class="navbar navbar-dark bg-dark">
     <span class="navbar-brand mb-0 h1">APP SCHENK-SANCHEZ</span>
-    <span class="example-spacer"></span>
-    <button class="btn btn-dark float-right" routerLink= "/list-empleados">Clientes</button>
-    <button class="btn btn-dark float-right" routerLink= "/situacioniva">Situacion Frente al IVA</button>
-    <button class="btn btn-dark float-right" routerLink= "/usuarios">Usuarios</button>
-    <span class="example-spacer"></span>
-    <button class="btn btn-dark btn-lg float-right example-icon favorite-icon" routerLink= "/login" arial-label="Example icon-button with heart icon">
-      <mat-icon>logout</mat-icon>
-    </button>
-  </mat-toolbar>
+</mat-toolbar>
   
   <div class="container mt-4">
       <div class="card">
           <div class="card-body">
               <span class="h3">Empresas</span>
               <div>
-              <h5 style="margin-top: 30px;" *ngIf="empresa.length == 0">No hay datos para mostrar</h5>
-              <table *ngIf="empresa.length > 0" class="table table-striped mt-5">
+              <h5 style="margin-top: 30px;" *ngIf="empresas.length == 0">No hay datos para mostrar</h5>
+              <table *ngIf="empresas.length > 0" class="table table-striped mt-5">
                   <thead>
                     <tr>
                       <th>Nombre de empresa</th>
@@ -24,11 +16,11 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngFor="let empresa of empresas">
+                    <tr *ngFor="let empresa of empresas; let i = index">
                       <td>{{ empresa.nombre }}</td>
                       <td>{{ empresa.descripcion }}</td>
                       <td>
-                        <i class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/login']"></i>
+                        <i class="fas fa-arrow-circle-right fa-lg text-info mr-2" style="cursor:pointer" (click)= "setEmpresa(i)" [routerLink]="['/login']"></i>
                       </td>
                     </tr>
                   </tbody>

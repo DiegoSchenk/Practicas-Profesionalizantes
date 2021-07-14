@@ -4,7 +4,7 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RolService } from 'src/app/services/rol.service';
-import { EmpresaService } from 'src/app/services/situacion-iva.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 
 
@@ -14,36 +14,38 @@ import { EmpresaService } from 'src/app/services/situacion-iva.service';
   styleUrls: ['./login-empresas.component.css']
 })
 export class LoginEmpresasComponent implements OnInit {
+  empresas: any[] = [];
+  fileName= 'SituacionesDeIVA.xlsx';
+  createEmpresa: FormGroup;
 
   constructor(private fb: FormBuilder,
-    private _empresasService: SituacionesIVAService,
+    private _empresasService: EmpresaService,
     private toastr: ToastrService, private rol:RolService) {
-      this.createSituacionIVA = this.fb.group({
-        codigo: ['', Validators.required],
+      this.createEmpresa = this.fb.group({
+        nombre: ['', Validators.required],
         descripcion: ['', Validators.required]
       })
-      this.http.get<{ip:string}>('https://jsonip.com')
-    .subscribe( data => {
-    console.log('th data', data);
-    this.ipAddress = data.ip
-    })
-}
+    }
+
 
   ngOnInit(): void {
-    this.getSituacionesIVA()
+    this.getEmpresas()
   }
 
-  getSituacionesIVA() {
-    this._situacionIVAService.getSituacionesIVA().subscribe(data => {
-      this.situacionesIVA = [];
+  getEmpresas() {
+    this._empresasService.getEmpresa().subscribe(data => {
+      this.empresas = [];
       data.forEach((element: any) => {
-        this.situacionesIVA.push({
+        this.empresas.push({
           id: element.payload.doc.id,
           ...element.payload.doc.data()
         })
       });
-      console.log(this.situacionesIVA);
     });
+  }
+
+  setEmpresa(id:number){
+    this._empresasService.setEmpresa(this.empresas[id])
   }
 
 }
