@@ -34,6 +34,8 @@ import { RolService } from './services/rol.service';
 import { NgxPrintModule } from 'ngx-print';
 import { HttpClientModule } from "@angular/common/http";
 import { ExcelService } from './services/excel.service';
+import { EmpresaService } from './services/empresa.service';
+
 
 @NgModule({
   declarations: [
@@ -69,7 +71,7 @@ import { ExcelService } from './services/excel.service';
     NgxPrintModule,
     HttpClientModule
   ],
-  providers: [RolService, ExcelService],
+  providers: [RolService, ExcelService,EmpresaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

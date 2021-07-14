@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class empresa {
+export class EmpresaService {
 
   empresa: any
   constructor() {}
@@ -17,6 +17,6 @@ export class empresa {
   }
 
   getDescripcion():number{
-    return this.empresa['descripción']
+    return this.empresa['descripcion']
   }
 }

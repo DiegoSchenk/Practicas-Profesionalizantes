@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 import { RolService } from 'src/app/services/rol.service';
+import { EmpresaService } from 'src/app/services/empresa.service';
+
 
 @Component({
   selector: 'app-login',
@@ -12,7 +14,7 @@ import { RolService } from 'src/app/services/rol.service';
 export class LoginComponent implements OnInit {
   //logo = 'http://assets.stickpng.com/images/5847ea22cef1014c0b5e4833.png'
   
-  constructor(private router: Router, private firestore: AngularFirestore, private rolservice:RolService) { }
+  constructor(private router: Router, private firestore: AngularFirestore, private rolservice:RolService, private empresa:EmpresaService) { }
 
   ngOnInit(): void {
   }
@@ -33,6 +35,12 @@ export class LoginComponent implements OnInit {
       } else {
           alert('Las credenciales de ingreso fueron incorrectas, vuelva a ingresarlas nuevamente.')
       }
+    })
+
+    var empresaa:string
+    empresaa = 'coca-cola';
+    this.firestore.collection('empresas', ref => ref.where('nombre', '==', empresaa)).valueChanges().subscribe((empress: any) => {
+      this.empresa.setEmpresa(empress[0]);
     })
   }
     
