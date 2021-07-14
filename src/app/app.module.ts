@@ -34,6 +34,7 @@ import { RolService } from './services/rol.service';
 import { NgxPrintModule } from 'ngx-print';
 import { HttpClientModule } from "@angular/common/http";
 import { ExcelService } from './services/excel.service';
+import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { ExcelService } from './services/excel.service';
     CreateUsuarioComponent,
     LoginComponent,
     AuditoriaIvaComponent,
+    LoginEmpresasComponent
   ],
   imports: [
     BrowserModule,

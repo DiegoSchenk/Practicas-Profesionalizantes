@@ -10,10 +10,12 @@ import { CreateUsuarioComponent } from './components/create-usuario/create-usuar
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.component';
+import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
 
 
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login-empresas', pathMatch: 'full' },
+  { path: 'login-empresas', component: LoginEmpresasComponent },
   { path: 'login', component: LoginComponent },
   { path: 'list-empleados', component: ListEmpleadosComponent ,canActivate: [AuthGuard]},
   { path: 'create-empleado', component: CreateEmpleadoComponent,canActivate: [AuthGuard] },
