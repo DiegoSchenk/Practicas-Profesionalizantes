@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
+import { EmpresaService } from './empresa.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuditoriaIVAService {
 
-  constructor(private firestore: AngularFirestore) { }
+  constructor(private firestore: AngularFirestore, empresa:EmpresaService) { }
 
   agregarAuditoriaIVA(auditoriaIVA: any): Promise<any> {
     return this.firestore.collection('auditoriaIVA').add(auditoriaIVA);
