@@ -17,6 +17,7 @@ import { JsontocsvService } from 'src/app/services/jsontocsv.service';
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { FileSaverService } from 'ngx-filesaver';
 
 
 
@@ -30,6 +31,11 @@ export class ListEmpleadosComponent implements OnInit {
   createEmpleado: FormGroup;
   fileName= 'Clientes.xlsx';
   ipAddress:any
+  auditoriaclientes: any[] = [];
+  auditoriaiva: any[] = [];
+  empleadoss: any[] = [];
+  situacioniva: any[] = [];
+  usuarios: any[] = [];
 
   constructor(private fb: FormBuilder,
               private _empleadoService: EmpleadoService,
@@ -39,6 +45,7 @@ export class ListEmpleadosComponent implements OnInit {
               private _auditoriaIVAService: AuditoriaIVAService,
               private _situacionIVA:SituacionesIVAService,
               private _usuarios:UsuariosService,
+              private filesaver:FileSaverService,
               private http:HttpClient,
               private jsontocsv:JsontocsvService,
               private rol: RolService) {
@@ -60,9 +67,9 @@ export class ListEmpleadosComponent implements OnInit {
 
   ngOnInit(): void {
     this.getEmpleados();
+    this.starterBackup();
     //Asi se obtiene el rol
     //console.log(this.rol.getRol())  
-    this.generarBackup();
   }
 
   exportexcel(): void 
@@ -131,72 +138,105 @@ export class ListEmpleadosComponent implements OnInit {
   }
 
 
+  starterBackup(){
+    this._auditoriaService.getAuditoriaClientes().subscribe(data => {
+      this.auditoriaclientes = [];
+      data.forEach((element: any) => {
+        this.auditoriaclientes.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(this.auditoriaclientes);
+    })
+
+    this._auditoriaIVAService.getAuditoriaIVA().subscribe(data => {
+      this.auditoriaiva = [];
+      data.forEach((element: any) => {
+        this.auditoriaiva.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(this.auditoriaiva);
+    })
+
+    this._empleadoService.getEmpleados().subscribe(data => {
+      this.empleadoss = [];
+      data.forEach((element: any) => {
+        this.empleadoss.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(this.empleadoss);
+    })
+
+    this._situacionIVA.getSituacionesIVA().subscribe(data => {
+      this.situacioniva = [];
+      data.forEach((element: any) => {
+        this.situacioniva.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(this.situacioniva);
+    })
+
+    this._usuarios.getUsuarios().subscribe(data => {
+      this.usuarios = [];
+      data.forEach((element: any) => {
+        this.usuarios.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+      console.log(this.usuarios);
+    })
+  }
+
   generarBackup(){
     
-    var auditoriaclientes: any[] = [];
-    this._auditoriaService.getAuditoriaClientes().subscribe(data => {
-      auditoriaclientes = [];
-      data.forEach((element: any) => {
-        auditoriaclientes.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-    console.log(auditoriaclientes);
-    })
+      const { parse } = require('json2csv');
+      
 
-    var auditoriaiva: any[] = [];
-    this._auditoriaIVAService.getAuditoriaIVA().subscribe(data => {
-      auditoriaiva = [];
-      data.forEach((element: any) => {
-        auditoriaiva.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-    console.log(auditoriaiva);
-    })
+      try {
+        const csv = parse(this.auditoriaclientes);
+        this.filesaver.save(csv, "auditoriaclientes.csv");
+      } catch (err) {
+        console.error(err);
+      }
+    
 
-    var empleadoss: any[] = [];
-    this._empleadoService.getEmpleados().subscribe(data => {
-      empleadoss = [];
-      data.forEach((element: any) => {
-        empleadoss.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-    console.log(empleadoss);
-    })
+      try {
+        const csv = parse(this.auditoriaiva);
+        this.filesaver.save(csv, "auditoriaiva.csv");
+      } catch (err) {
+        console.error(err);
+      }
 
-    var situacioniva: any[] = [];
-    this._situacionIVA.getSituacionesIVA().subscribe(data => {
-      situacioniva = [];
-      data.forEach((element: any) => {
-        situacioniva.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-    console.log(situacioniva);
-    })
+      try {
+        const csv = parse(this.empleadoss);
+        this.filesaver.save(csv, "empleados.csv");
+      } catch (err) {
+        console.error(err);
+      }
 
-    var usuarios: any[] = [];
-    this._usuarios.getUsuarios().subscribe(data => {
-      usuarios = [];
-      data.forEach((element: any) => {
-        usuarios.push({
-          id: element.payload.doc.id,
-          ...element.payload.doc.data()
-        })
-      });
-    console.log(usuarios);
-    })
+      try {
+        const csv = parse(this.situacioniva);
+        this.filesaver.save(csv, "situacionIVA.csv");
+      } catch (err) {
+        console.error(err);
+      }
 
+      try {
+        const csv = parse(this.usuarios);
+        console.log(this.usuarios);
+        this.filesaver.save(csv, "usuarios.csv");
+      } catch (err) {
+        console.error(err);
+      }
     //this.jsontocsv.downloadFile(this.jsonData, 'backup' + Date().toString());
   }
 
-  /* Va en el create empresa esta parte
-  
-  */
 }
