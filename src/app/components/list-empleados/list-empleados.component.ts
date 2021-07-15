@@ -196,4 +196,7 @@ export class ListEmpleadosComponent implements OnInit {
     //this.jsontocsv.downloadFile(this.jsonData, 'backup' + Date().toString());
   }
 
+  /* Va en el create empresa esta parte
+  
+  */
 }
