@@ -13,6 +13,12 @@ import { DatePipe } from '@angular/common';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ExcelService } from 'src/app/services/excel.service';
 import * as XLSX from 'xlsx'; 
+import { JsontocsvService } from 'src/app/services/jsontocsv.service';
+import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
+import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
+
+
 
 @Component({
   selector: 'app-list-empleados',
@@ -30,7 +36,11 @@ export class ListEmpleadosComponent implements OnInit {
               private excelService: ExcelService,
               private toastr: ToastrService, 
               private _auditoriaService: AuditoriaClientesService,
+              private _auditoriaIVAService: AuditoriaIVAService,
+              private _situacionIVA:SituacionesIVAService,
+              private _usuarios:UsuariosService,
               private http:HttpClient,
+              private jsontocsv:JsontocsvService,
               private rol: RolService) {
               this.createEmpleado = this.fb.group({
                 nombre: ['', Validators.required],
@@ -43,15 +53,16 @@ export class ListEmpleadosComponent implements OnInit {
               })
               this.http.get<{ip:string}>('https://jsonip.com')
               .subscribe( data => {
-              console.log('th data', data);
+              //console.log('th data', data);
               this.ipAddress = data.ip
               })
   }
 
   ngOnInit(): void {
-    this.getEmpleados()
+    this.getEmpleados();
     //Asi se obtiene el rol
     //console.log(this.rol.getRol())  
+    this.generarBackup();
   }
 
   exportexcel(): void 
@@ -78,7 +89,7 @@ export class ListEmpleadosComponent implements OnInit {
           ...element.payload.doc.data()
         })
       });
-      console.log(this.empleados);
+      //console.log(this.empleados);
     });
   }
 
@@ -120,6 +131,69 @@ export class ListEmpleadosComponent implements OnInit {
   }
 
 
+  generarBackup(){
+    
+    var auditoriaclientes: any[] = [];
+    this._auditoriaService.getAuditoriaClientes().subscribe(data => {
+      auditoriaclientes = [];
+      data.forEach((element: any) => {
+        auditoriaclientes.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(auditoriaclientes);
+    })
 
+    var auditoriaiva: any[] = [];
+    this._auditoriaIVAService.getAuditoriaIVA().subscribe(data => {
+      auditoriaiva = [];
+      data.forEach((element: any) => {
+        auditoriaiva.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(auditoriaiva);
+    })
+
+    var empleadoss: any[] = [];
+    this._empleadoService.getEmpleados().subscribe(data => {
+      empleadoss = [];
+      data.forEach((element: any) => {
+        empleadoss.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(empleadoss);
+    })
+
+    var situacioniva: any[] = [];
+    this._situacionIVA.getSituacionesIVA().subscribe(data => {
+      situacioniva = [];
+      data.forEach((element: any) => {
+        situacioniva.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(situacioniva);
+    })
+
+    var usuarios: any[] = [];
+    this._usuarios.getUsuarios().subscribe(data => {
+      usuarios = [];
+      data.forEach((element: any) => {
+        usuarios.push({
+          id: element.payload.doc.id,
+          ...element.payload.doc.data()
+        })
+      });
+    console.log(usuarios);
+    })
+
+    //this.jsontocsv.downloadFile(this.jsonData, 'backup' + Date().toString());
+  }
 
 }
