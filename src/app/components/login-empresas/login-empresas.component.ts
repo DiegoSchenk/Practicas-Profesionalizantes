@@ -51,13 +51,12 @@ export class LoginEmpresasComponent implements OnInit {
   }
 
   crearEmpresa(empresa:string, desc:string){
-    this._empresasService.setEmpresa(empresa);
-
-
-    const usuario: any = {
+    
+  
+    const usuarionuevo: any = {
       codigo: 1,
       usuario: 'Supervisor',
-      contrasena: 1,
+      contrasena: '1',
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
@@ -66,8 +65,9 @@ export class LoginEmpresasComponent implements OnInit {
       nombre: empresa,
       descripcion: desc 
     }
+    this._empresasService.setEmpresa(empresanueva);
     this._empresasService.agregarEmpresa(empresanueva);
-    this._usuarios.agregarUsuario(usuario);
-    console.log('Empresa creada con exito! Para poder entrar al sistema utilice las siguientes credenciales. Usuario: Supervisor, Contraseña: 1');
+    this._usuarios.agregarUsuario(usuarionuevo);
+    alert('Empresa creada con exito! Para poder entrar al sistema utilice las siguientes credenciales. Usuario: Supervisor, Contraseña: 1');
   }
 }
