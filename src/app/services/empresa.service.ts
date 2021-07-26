@@ -14,8 +14,24 @@ export class EmpresaService {
     this.empresa = usuario;
   }
 
-  getEmpresa(): Observable<any> {
+  agregarEmpresa(empresa: any): Promise<any> {
+    return this.firestore.collection('empresas').add(empresa);
+  }
+
+  eliminarEmpresa(id: string): Promise<any> {
+    return this.firestore.collection('empresas').doc(id).delete();
+  }
+
+  getEmpresas(): Observable<any> {
     return this.firestore.collection('empresas', ref => ref.orderBy('nombre', 'asc')).snapshotChanges();
+  }
+
+  getEmpresa(id: string): Observable<any> {
+    return this.firestore.collection('empresas').doc(id).snapshotChanges();
+  }
+  
+  actualizarEmpresa(id: string, data:any): Promise<any> {
+    return this.firestore.collection('empresas').doc(id).update(data);
   }
 
   getNombre():number{
@@ -26,3 +42,9 @@ export class EmpresaService {
     return this.empresa['descripcion']
   }
 }
+
+
+
+
+
+

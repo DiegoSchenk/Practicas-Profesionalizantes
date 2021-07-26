@@ -33,7 +33,7 @@ export class LoginEmpresasComponent implements OnInit {
   }
 
   getEmpresas() {
-    this._empresasService.getEmpresa().subscribe(data => {
+    this._empresasService.getEmpresas().subscribe(data => {
       this.empresas = [];
       data.forEach((element: any) => {
         this.empresas.push({

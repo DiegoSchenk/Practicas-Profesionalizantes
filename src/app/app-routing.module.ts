@@ -11,7 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { AuthGuard } from './guards/auth.guard';
 import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.component';
 import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
-
+import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login-empresas', pathMatch: 'full' },
@@ -19,6 +19,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'list-empleados', component: ListEmpleadosComponent ,canActivate: [AuthGuard]},
   { path: 'create-empleado', component: CreateEmpleadoComponent,canActivate: [AuthGuard] },
+  { path: 'create-empresa', component: CreateEmpresaComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent},
   { path: 'editSituacionIVA/:id', component: CreateIvaComponent},
   { path: 'editUsuario/:id', component: CreateUsuarioComponent},

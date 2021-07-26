@@ -36,6 +36,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { ExcelService } from './services/excel.service';
 import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
 import { EmpresaService } from './services/empresa.service';
+import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { EmpresaService } from './services/empresa.service';
     CreateUsuarioComponent,
     LoginComponent,
     AuditoriaIvaComponent,
-    LoginEmpresasComponent
+    LoginEmpresasComponent,
+    CreateEmpresaComponent
   ],
   imports: [
     BrowserModule,
