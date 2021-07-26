@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { RolService } from 'src/app/services/rol.service';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 
 
 
@@ -20,6 +21,7 @@ export class LoginEmpresasComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private _empresasService: EmpresaService,
+    private _usuarios:UsuariosService,
     private toastr: ToastrService, private rol:RolService) {
       this.createEmpresa = this.fb.group({
         nombre: ['', Validators.required],
@@ -48,4 +50,24 @@ export class LoginEmpresasComponent implements OnInit {
     this._empresasService.setEmpresa(this.empresas[id])
   }
 
+  crearEmpresa(empresa:string, desc:string){
+    
+  
+    const usuarionuevo: any = {
+      codigo: 1,
+      usuario: 'Supervisor',
+      contrasena: '1',
+      fechaCreacion: new Date(),
+      fechaActualizacion: new Date()
+    }
+    
+    const empresanueva: any = {
+      nombre: empresa,
+      descripcion: desc 
+    }
+    this._empresasService.setEmpresa(empresanueva);
+    this._empresasService.agregarEmpresa(empresanueva);
+    this._usuarios.agregarUsuario(usuarionuevo);
+    alert('Empresa creada con exito! Para poder entrar al sistema utilice las siguientes credenciales. Usuario: Supervisor, Contraseña: 1');
+  }
 }

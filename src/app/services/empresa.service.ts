@@ -41,6 +41,10 @@ export class EmpresaService {
   getDescripcion():number{
     return this.empresa['descripcion']
   }
+
+  agregarEmpresa(empresa: any): Promise<any> {
+    return this.firestore.collection('empresas').add(empresa);
+  }
 }
 
 

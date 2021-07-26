@@ -37,6 +37,7 @@ import { ExcelService } from './services/excel.service';
 import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
 import { EmpresaService } from './services/empresa.service';
 import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
+import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
 
 
 @NgModule({
@@ -73,9 +74,10 @@ import { CreateEmpresaComponent } from './components/create-empresa/create-empre
     MatFormFieldModule,
     MatInputModule,
     NgxPrintModule,
-    HttpClientModule
+    HttpClientModule,
+    FileSaverModule,
   ],
-  providers: [RolService, ExcelService,EmpresaService],
+  providers: [RolService, ExcelService,EmpresaService, FileSaverService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
