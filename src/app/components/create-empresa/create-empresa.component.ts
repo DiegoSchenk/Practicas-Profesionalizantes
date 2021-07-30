@@ -51,6 +51,9 @@ export class CreateEmpresaComponent implements OnInit {
   agregarEditarEmpresa() {
     this.submitted = true;
 
+    if (this.createEmpresa.invalid) {
+      return;
+    }
     if (this.id === null) {
       this.agregarEmpresa();
     } else {
@@ -68,7 +71,11 @@ export class CreateEmpresaComponent implements OnInit {
       fechaCreacion: new Date(),
       fechaActualizacion: new Date()
     }
-
+    const empresanueva: any = {
+      nombre: empresa,
+      descripcion: desc 
+    }
+    this._empresaService.setEmpresa(empresanueva);
     this._usuarios.agregarUsuario(usuarionuevo);
     alert('Para poder entrar al sistema utilice las siguientes credenciales. Usuario: Supervisor, Contraseña: 1');
   }
