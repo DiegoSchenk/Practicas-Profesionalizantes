@@ -5,6 +5,7 @@ import { ToastrService } from 'ngx-toastr';
 import { RolService } from 'src/app/services/rol.service';
 import { HttpClient } from '@angular/common/http';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { UsuariosService } from 'src/app/services/usuarios.service';
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 import { IvyParser } from '@angular/compiler';
 import { Input } from '@angular/core';
@@ -25,6 +26,7 @@ export class CreateEmpresaComponent implements OnInit {
   
   constructor(private fb: FormBuilder,
     private _empresaService: EmpresaService,
+    private _usuarios:UsuariosService,
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
@@ -56,6 +58,22 @@ export class CreateEmpresaComponent implements OnInit {
     }
   }
 
+  crearEmpresa(empresa:string, desc:string){
+    
+  
+    const usuarionuevo: any = {
+      codigo: 1,
+      usuario: 'Supervisor',
+      contrasena: '1',
+      fechaCreacion: new Date(),
+      fechaActualizacion: new Date()
+    }
+
+    this._usuarios.agregarUsuario(usuarionuevo);
+    alert('Para poder entrar al sistema utilice las siguientes credenciales. Usuario: Supervisor, Contraseña: 1');
+  }
+
+
   agregarEmpresa() {
     const empresa: any = {
       nombre: this.createEmpresa.value.nombre,
@@ -68,6 +86,8 @@ export class CreateEmpresaComponent implements OnInit {
       this.toastr.success('La empresa fue registrada con exito!', 'Empresa Registrada', {
         positionClass: 'toast-bottom-right'
       });
+      this.router.navigate(['/login-empresas']);
+      this.crearEmpresa(this.createEmpresa.value.nombre, this.createEmpresa.value.descripcion)
     }).catch(error => {
       console.log(error);
       this.loading = false;
