@@ -8,6 +8,9 @@ import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 import { IvyParser } from '@angular/compiler';
 import { Input } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-create-iva',
@@ -30,6 +33,8 @@ export class CreateIvaComponent implements OnInit {
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
+    private firestore: AngularFirestore,
+    private _empresaService:EmpresaService,
     private http: HttpClient,
     private aRoute: ActivatedRoute) {
     this.createSituacionIVA = this.fb.group({
@@ -82,28 +87,40 @@ export class CreateIvaComponent implements OnInit {
       fechaActualizacion: new Date()
     }
     this.loading = true;
-    this._situacionIVAService.agregarSituacionIVA(situacionIVA).then(() => {
-      this.toastr.success('La situacion de IVA fue registrada con exito!', 'Situacion de IVA Registrada', {
-        positionClass: 'toast-bottom-right'
-      });
-      const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
-          const auditoriaIVA: any = {
-            numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
-            tipooprA: 'Alta',
-            usuarioA: this.rol.getUsuario(),
-            terminalA: this.ipAddress,
-            fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
-            codigoA: this.createSituacionIVA.value.codigo,
-            descA: 'Se ha creado el registro.',
-          }
-          this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
+    
+    this.firestore.collection('situacion-iva' + this._empresaService.getNombre() , ref => ref.where('codigo', '==', this.createSituacionIVA.value.codigo)).valueChanges().subscribe((user: any) => {
+      if (user.length > 0) {
+        this._situacionIVAService.agregarSituacionIVA(situacionIVA).then(() => {
+          this.toastr.success('La situacion de IVA fue registrada con exito!', 'Situacion de IVA Registrada', {
+            positionClass: 'toast-bottom-right'
+          });
+          const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
+              const auditoriaIVA: any = {
+                numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
+                tipooprA: 'Alta',
+                usuarioA: this.rol.getUsuario(),
+                terminalA: this.ipAddress,
+                fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(),
+                codigoA: this.createSituacionIVA.value.codigo,
+                descA: 'Se ha creado el registro.',
+              }
+              this._auditoriaService.agregarAuditoriaIVA(auditoriaIVA);
+              this.loading = false;
+              audit_subs.unsubscribe();
+              this.router.navigate(['/situacioniva']);
+            })    
+        }).catch(error => {
+          console.log(error);
           this.loading = false;
-          audit_subs.unsubscribe();
-          this.router.navigate(['/situacioniva']);
-        })    
-    }).catch(error => {
-      console.log(error);
-      this.loading = false;
+        })
+      
+      } else {
+        this.toastr.warning('El codigo ingresado ya existe', 'Error', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.loading = false;
+      }
+        
     })
   }
 

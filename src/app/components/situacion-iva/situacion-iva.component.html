@@ -29,8 +29,8 @@
                     <td>{{ situacionIVA.codigo }}</td>
                     <td>{{ situacionIVA.descripcion }}</td>
                     <td>
-                      <i class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editSituacionIVA/', situacionIVA.id]"></i>
-                      <i (click)="eliminarSituacionIVA(situacionIVA.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
+                      <i style= cursor:pointer class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editSituacionIVA/', situacionIVA.id]"></i>
+                      <i style= cursor:pointer (click)="eliminarSituacionIVA(situacionIVA.id)" class="fas fa-trash-alt fa-lg text-danger"></i>
                     </td>
                   </tr>
                 </tbody>

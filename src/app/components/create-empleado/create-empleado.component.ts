@@ -7,6 +7,9 @@ import { EmpleadoService } from 'src/app/services/empleado.service';
 import { RolService } from 'src/app/services/rol.service';
 import { HttpClient } from '@angular/common/http';
 import { DatePipe } from '@angular/common';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-create-empleado',
@@ -25,6 +28,8 @@ export class CreateEmpleadoComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private _empleadoService: EmpleadoService,
     private _auditoriaService: AuditoriaClientesService,
+    private firestore: AngularFirestore,
+    private _empresaService:EmpresaService,
     private router: Router,
     private toastr: ToastrService,
     private rol:RolService,
@@ -94,29 +99,42 @@ export class CreateEmpleadoComponent implements OnInit {
     
 
     this.loading = true;
-    this._empleadoService.agregarEmpleado(empleado).then(() => {
-      this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
-        positionClass: 'toast-bottom-right'
-      });
-      const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
-        const auditoriacliente: any = {
-          numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
-          tipooprA: 'Alta',
-          usuarioA: this.rol.getUsuario(),
-          terminalA: this.ipAddress,
-          fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
-          dniA: this.createEmpleado.value.dni,
-          descA: 'Se ha creado el registro: ' + this.createEmpleado.value.dni + '.',
-        }
-        this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
+
+    this.firestore.collection('empleados' + this._empresaService.getNombre() , ref => ref.where('dni', '==', this.createEmpleado.value.dni)).valueChanges().subscribe((user: any) => {
+      if (user.length > 0) {
+        this._empleadoService.agregarEmpleado(empleado).then(() => {
+          this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
+            positionClass: 'toast-bottom-right'
+          });
+          const audit_subs = this._auditoriaService.getNumopr().subscribe((num:any) =>{
+            const auditoriacliente: any = {
+              numoprA: num.length > 0 ? num[0]['numoprA'] + 1 : 1,
+              tipooprA: 'Alta',
+              usuarioA: this.rol.getUsuario(),
+              terminalA: this.ipAddress,
+              fechahoraA: new Date().toDateString()+ ' ' +new Date().getHours()+ ':' +new Date().getMinutes()+ ':' +new Date().getSeconds(), 
+              dniA: this.createEmpleado.value.dni,
+              descA: 'Se ha creado el registro: ' + this.createEmpleado.value.dni + '.',
+            }
+            this._auditoriaService.agregarAuditoriaClientes(auditoriacliente);
+            this.loading = false;
+            audit_subs.unsubscribe();
+            this.router.navigate(['/list-empleados']);
+           })
+        }).catch(error => {
+          console.log(error);
+          this.loading = false;
+        })
+    
+      } else {
+        this.toastr.warning('El dni ingresado ya existe', 'Error', {
+          positionClass: 'toast-bottom-right'
+        });
         this.loading = false;
-        audit_subs.unsubscribe();
-        this.router.navigate(['/list-empleados']);
-       })
-    }).catch(error => {
-      console.log(error);
-      this.loading = false;
+      }
+        
     })
+
   }
 
   editarEmpleado(id: string) {
