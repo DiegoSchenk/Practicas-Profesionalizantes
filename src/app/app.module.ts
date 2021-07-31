@@ -38,6 +38,7 @@ import { LoginEmpresasComponent } from './components/login-empresas/login-empres
 import { EmpresaService } from './services/empresa.service';
 import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
+import { DataTableComponent } from './components/situacion-iva/data-table/data-table.component';
 
 
 @NgModule({
@@ -54,7 +55,8 @@ import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
     LoginComponent,
     AuditoriaIvaComponent,
     LoginEmpresasComponent,
-    CreateEmpresaComponent
+    CreateEmpresaComponent,
+    DataTableComponent
   ],
   imports: [
     BrowserModule,

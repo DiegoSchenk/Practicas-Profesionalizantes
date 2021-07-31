@@ -1,0 +1,19 @@
+<table id="excel-table" *ngIf="situacionesIVA.length > 0" class="table table-striped mt-5">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Descripcion</th>
+        <th *ngIf="showBotones">Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let situacionIVA of situacionesIVA">
+        <td>{{ situacionIVA.codigo }}</td>
+        <td>{{ situacionIVA.descripcion }}</td>
+        <td *ngIf="showBotones">
+          <i style= cursor:pointer class="fas fa-edit fa-lg text-info mr-2" [routerLink]="['/editSituacionIVA/', situacionIVA.id]"></i>
+          <i style= cursor:pointer (click)="eliminarSituacionIVA(situacionIVA.id)" class="fas fa-trash-alt fa-lg text-danger"></i> 
+        </td>
+      </tr>
+    </tbody>
+</table>
