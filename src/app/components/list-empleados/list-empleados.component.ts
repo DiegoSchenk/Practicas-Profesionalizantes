@@ -280,7 +280,7 @@ export class ListEmpleadosComponent implements OnInit {
     }
   }
 
-  borrarTablas(){
+  restaurarBackup(){
     this._empleadoService.borrarTablas();
   }
 }

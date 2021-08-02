@@ -38,7 +38,7 @@ export class EmpleadoService {
       sub.unsubscribe();
     });
 
-    const sub2 = this.firestore.collection('auditoriaiva'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+    const sub2 = this.firestore.collection('auditoriaIVA'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
       querySnapshot.docs.forEach(snapshot => {
         snapshot.ref.delete();
       });
@@ -52,7 +52,7 @@ export class EmpleadoService {
       sub3.unsubscribe();
     });
 
-    const sub4 = this.firestore.collection('situacionIVA'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+    const sub4 = this.firestore.collection('situaciones-iva'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
       querySnapshot.docs.forEach(snapshot => {
         snapshot.ref.delete();
       });
