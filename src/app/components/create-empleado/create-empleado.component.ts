@@ -100,8 +100,8 @@ export class CreateEmpleadoComponent implements OnInit {
 
     this.loading = true;
 
-    this.firestore.collection('empleados' + this._empresaService.getNombre() , ref => ref.where('dni', '==', this.createEmpleado.value.dni)).valueChanges().subscribe((user: any) => {
-      if (user.length > 0) {
+    const sub = this.firestore.collection('empleados' + this._empresaService.getNombre() , ref => ref.where('dni', '==', this.createEmpleado.value.dni)).valueChanges().subscribe((user: any) => {
+      if (user.length == 0) {
         this._empleadoService.agregarEmpleado(empleado).then(() => {
           this.toastr.success('El cliente fue registrado con exito!', 'Cliente Registrado', {
             positionClass: 'toast-bottom-right'
@@ -132,7 +132,7 @@ export class CreateEmpleadoComponent implements OnInit {
         });
         this.loading = false;
       }
-        
+      sub.unsubscribe();  
     })
 
   }

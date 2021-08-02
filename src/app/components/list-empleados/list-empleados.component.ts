@@ -279,4 +279,8 @@ export class ListEmpleadosComponent implements OnInit {
       console.log(result)
     }
   }
+
+  borrarTablas(){
+    this._empleadoService.borrarTablas();
+  }
 }

@@ -88,8 +88,8 @@ export class CreateIvaComponent implements OnInit {
     }
     this.loading = true;
     
-    this.firestore.collection('situacion-iva' + this._empresaService.getNombre() , ref => ref.where('codigo', '==', this.createSituacionIVA.value.codigo)).valueChanges().subscribe((user: any) => {
-      if (user.length > 0) {
+    const sub = this.firestore.collection('situacion-iva' + this._empresaService.getNombre() , ref => ref.where('codigo', '==', this.createSituacionIVA.value.codigo)).valueChanges().subscribe((user: any) => {
+      if (user.length == 0) {
         this._situacionIVAService.agregarSituacionIVA(situacionIVA).then(() => {
           this.toastr.success('La situacion de IVA fue registrada con exito!', 'Situacion de IVA Registrada', {
             positionClass: 'toast-bottom-right'
@@ -120,7 +120,7 @@ export class CreateIvaComponent implements OnInit {
         });
         this.loading = false;
       }
-        
+      sub.unsubscribe();  
     })
   }
 

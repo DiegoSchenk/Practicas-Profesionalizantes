@@ -30,4 +30,40 @@ export class EmpleadoService {
     return this.firestore.collection('empleados' + this.empresa.getNombre()).doc(id).update(data);
   }
 
+  borrarTablas() {
+    const sub = this.firestore.collection('auditoriaclientes'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+        snapshot.ref.delete();
+      });
+      sub.unsubscribe();
+    });
+
+    const sub2 = this.firestore.collection('auditoriaiva'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+        snapshot.ref.delete();
+      });
+      sub2.unsubscribe();
+    });
+
+    const sub3 = this.firestore.collection('empleados'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+        snapshot.ref.delete();
+      });
+      sub3.unsubscribe();
+    });
+
+    const sub4 = this.firestore.collection('situacionIVA'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+        snapshot.ref.delete();
+      });
+      sub4.unsubscribe();
+    });
+
+    const sub5 = this.firestore.collection('usuarios'+ this.empresa.getNombre()).get().subscribe(querySnapshot => {
+      querySnapshot.docs.forEach(snapshot => {
+        snapshot.ref.delete();
+      });
+      sub5.unsubscribe();
+    });
+  }
 }
