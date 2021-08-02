@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 
@@ -13,7 +14,9 @@ export class UsuariosComponent implements OnInit {
 
   usuarios: any[] = [];
 
+
   constructor(private _usuarioService: UsuariosService,
+              private router: Router,
               private toastr: ToastrService) {
   }
 
@@ -40,6 +43,7 @@ export class UsuariosComponent implements OnInit {
       this.toastr.error('El usuario fue eliminado con exito', 'Registro eliminado!', {
         positionClass: 'toast-bottom-right'
       });
+      this.router.navigate(['/usuarios']);
     }).catch(error => {
       console.log(error);
     })

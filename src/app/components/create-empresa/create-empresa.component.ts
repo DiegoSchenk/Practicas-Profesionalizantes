@@ -9,6 +9,7 @@ import { UsuariosService } from 'src/app/services/usuarios.service';
 import { AuditoriaIVAService } from 'src/app/services/auditoria-iva.service';
 import { IvyParser } from '@angular/compiler';
 import { Input } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -29,6 +30,7 @@ export class CreateEmpresaComponent implements OnInit {
     private _usuarios:UsuariosService,
     private router: Router,
     private toastr: ToastrService,
+    private firestore: AngularFirestore,
     private rol:RolService,
     private aRoute: ActivatedRoute) {
     this.createEmpresa = this.fb.group({
@@ -89,16 +91,29 @@ export class CreateEmpresaComponent implements OnInit {
       fechaActualizacion: new Date()
     }
     this.loading = true;
-    this._empresaService.agregarEmpresa(empresa).then(() => {
-      this.toastr.success('La empresa fue registrada con exito!', 'Empresa Registrada', {
-        positionClass: 'toast-bottom-right'
-      });
-      this.router.navigate(['/login-empresas']);
-      this.crearEmpresa(this.createEmpresa.value.nombre, this.createEmpresa.value.descripcion)
-    }).catch(error => {
-      console.log(error);
-      this.loading = false;
+    
+    const sub = this.firestore.collection('empresas', ref => ref.where('nombre', '==', this.createEmpresa.value.nombre)).valueChanges().subscribe((user: any) => {
+      if (user.length == 0) {
+        this._empresaService.agregarEmpresa(empresa).then(() => {
+          this.toastr.success('La empresa fue registrada con exito!', 'Empresa Registrada', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.router.navigate(['/login-empresas']);
+          this.crearEmpresa(this.createEmpresa.value.nombre, this.createEmpresa.value.descripcion)
+        }).catch(error => {
+          console.log(error);
+          this.loading = false;
+        })
+
+      } else {
+        this.toastr.warning('El nombre de empresa ingresado ya existe', 'Error', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.loading = false;
+      }
+      sub.unsubscribe();  
     })
+
   }
 
   editarEmpresa(id: string) {

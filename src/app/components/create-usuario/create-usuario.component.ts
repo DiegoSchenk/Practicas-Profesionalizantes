@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UsuariosService } from 'src/app/services/usuarios.service';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { EmpresaService } from 'src/app/services/empresa.service';
 
 @Component({
   selector: 'app-create-usuario',
@@ -19,6 +21,8 @@ export class CreateUsuarioComponent implements OnInit {
   constructor(private fb: FormBuilder,
     private _usuarioService: UsuariosService,
     private router: Router,
+    private firestore: AngularFirestore,
+    private _empresaService:EmpresaService,
     private toastr: ToastrService,
     private aRoute: ActivatedRoute) {
     this.createUsuario = this.fb.group({
@@ -58,16 +62,28 @@ export class CreateUsuarioComponent implements OnInit {
       fechaActualizacion: new Date()
     }
     this.loading = true;
-    this._usuarioService.agregarUsuario(usuario).then(() => {
-      this.toastr.success('El usuario fue registrado con exito!', 'Usuario Registrado', {
-        positionClass: 'toast-bottom-right'
-      });
-      this.loading = false;
-      this.router.navigate(['/usuarios']);
-    }).catch(error => {
-      console.log(error);
-      this.loading = false;
-    })
+    const sub = this.firestore.collection('usuarios' + this._empresaService.getNombre() , ref => ref.where('usuario', '==', this.createUsuario.value.usuario)).valueChanges().subscribe((user: any) => {
+      if (user.length == 0) {
+        this._usuarioService.agregarUsuario(usuario).then(() => {
+          this.toastr.success('El usuario fue registrado con exito!', 'Usuario Registrado', {
+            positionClass: 'toast-bottom-right'
+          });
+          this.loading = false;
+          this.router.navigate(['/usuarios']);
+        }).catch(error => {
+          console.log(error);
+          this.loading = false;
+        })
+
+      } else {
+        this.toastr.warning('El usuario ingresado ya existe', 'Error', {
+          positionClass: 'toast-bottom-right'
+        });
+        this.loading = false;
+      }
+      sub.unsubscribe();  
+    })  
+
   }
 
   editarUsuario(id: string) {
@@ -92,8 +108,8 @@ export class CreateUsuarioComponent implements OnInit {
 
 
   esEditar() {
-    this.titulo = 'Editar Usuarios'
     if (this.id !== null) {
+      this.titulo = 'Editar Usuarios'
       this.loading = true;
       this._usuarioService.getUsuario(this.id).subscribe(data => {
         this.loading = false;
