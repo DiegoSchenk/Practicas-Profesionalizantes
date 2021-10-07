@@ -13,6 +13,8 @@ import { SituacionesIVAService } from 'src/app/services/situacion-iva.service';
 import { UsuariosService } from 'src/app/services/usuarios.service';
 import { FileSaverService } from 'ngx-filesaver';
 import { EmpresaService } from 'src/app/services/empresa.service';
+import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-list-empleados',
@@ -32,13 +34,15 @@ export class ListEmpleadosComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
               private _empleadoService: EmpleadoService,
-              private toastr: ToastrService, 
+              private toastr: ToastrService,
+              private firestore: AngularFirestore, 
               private _auditoriaService: AuditoriaClientesService,
               private _auditoriaIVAService: AuditoriaIVAService,
               private _situacionIVA:SituacionesIVAService,
               private _usuarios:UsuariosService,
               private filesaver:FileSaverService,
               private http:HttpClient,
+              private router: Router,
               private rol: RolService,
               private _empresaService: EmpresaService) {
               this.createEmpleado = this.fb.group({
@@ -280,7 +284,19 @@ export class ListEmpleadosComponent implements OnInit {
     }
   }
 
-  restaurarBackup(){
+  borrarEmpresa(){
     this._empleadoService.borrarTablas();
+
+   // const sub = this.firestore.collection('empresas' + this._empresaService.getNombre() , ref => ref.where('nombre', '==', this._empresaService.getNombre())).valueChanges().subscribe((user: any) => {
+   
+
+    //this._empresaService.eliminarEmpresa(this._empresaService.getNombre());
+    this.router.navigate(['']);
+    
+  }
+
+  restaurarEmpresa(){
+    this._empleadoService.borrarTablas();
+
   }
 }
