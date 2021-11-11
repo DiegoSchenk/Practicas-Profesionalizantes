@@ -13,6 +13,7 @@ import { AuditoriaIvaComponent } from './components/auditoria-iva/auditoria-iva.
 import { LoginEmpresasComponent } from './components/login-empresas/login-empresas.component';
 import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 import { RestaurarBackupComponent } from './components/restaurar-backup/restaurar-backup.component';
+import { ContaduriaComponent } from './components/contaduria/contaduria.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login-empresas', pathMatch: 'full' },
@@ -20,7 +21,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'list-empleados', component: ListEmpleadosComponent ,canActivate: [AuthGuard]},
   { path: 'restaurar-backup', component: RestaurarBackupComponent ,canActivate: [AuthGuard]},
-  { path: 'contaduria', component: RestaurarBackupComponent ,canActivate: [AuthGuard]},
+  { path: 'contaduria', component: ContaduriaComponent ,canActivate: [AuthGuard]},
   { path: 'create-empleado', component: CreateEmpleadoComponent,canActivate: [AuthGuard] },
   { path: 'create-empresa', component: CreateEmpresaComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent},
