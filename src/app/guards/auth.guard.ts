@@ -14,8 +14,8 @@ export class AuthGuard implements CanActivate {
   
   userLinks= [
     [ ], //0
-    ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','editUsuario/:id','situacioniva','usuarios','create-usuarios','create-iva'],//  1: Supervisor.
-    ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','situacioniva','create-iva'],//   2: Cliente.
+    ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','editUsuario/:id','situacioniva','usuarios','create-usuarios','create-iva', 'restaurar-backup', 'contaduria'],//  1: Supervisor.
+    ['', 'login', 'list-empleados','create-empleado','editEmpleado/:id','editSituacionIVA/:id','situacioniva','create-iva', 'restaurar-backup', 'contaduria'],//   2: Cliente.
     ['', 'login','auditoria', 'auditoria-iva'],//   3: Auditor.
     ['', 'login','list-empleados','situacioniva']//    4: Usuario. 
   ]
