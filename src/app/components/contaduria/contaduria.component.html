@@ -12,8 +12,9 @@
     </button>
 </mat-toolbar>
 
-<div class="Backup Options">
-    <button mat-raised-button color="primary">Primary</button>
-    <button mat-raised-button color="accent">Accent</button>
-    <button mat-raised-button color="warn">Warn</button>
-</div>
+<div class="contaduria">
+    <button  style = "background-color:rgb(253, 0, 0)" class ="btn btn-dark btn-lg float-left offset-sm-1 example-icon favorite-icon" (click)="libroDiario()">Libro Diario <mat-icon>today</mat-icon></button> 
+    <button  style = "background-color:rgb(58, 13, 180)" class ="btn btn-dark btn-lg float-left offset-sm-1 example-icon favorite-icon" (click)="diarioMayor()">Diario Mayor <mat-icon>bar_chart</mat-icon></button>
+    <button  style = "background-color:rgb(180, 13, 138)" class ="btn btn-dark btn-lg float-left offset-sm-1 example-icon favorite-icon" (click)="balanceGeneral()">Balance General <mat-icon> attach_money</mat-icon></button>  
+  </div>
+  

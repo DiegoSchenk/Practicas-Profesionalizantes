@@ -1,0 +1,1 @@
+firestore-export --accountCredentials practicasAPIkey.json --backupFile practicasBackup_%DATE%.json

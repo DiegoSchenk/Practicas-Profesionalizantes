@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-contaduria',
@@ -7,9 +8,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ContaduriaComponent implements OnInit {
 
-  constructor() { }
+  constructor(public guard:AuthGuard) { }
 
   ngOnInit(): void {
   }
+
+  libroDiario(){}
+  diarioMayor(){}
+  balanceGeneral(){}
 
 }

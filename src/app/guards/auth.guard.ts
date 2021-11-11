@@ -23,7 +23,7 @@ export class AuthGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
       var rol = this.rol.getRol()
-      if(this.userLinks[rol].includes(route.url.join('login-empresas'))){
+      if(this.userLinks[rol].includes(route.url.join(''))){
         return true;
     }
     return false;
