@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthGuard } from 'src/app/guards/auth.guard';
 
 @Component({
   selector: 'app-restaurar-backup',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RestaurarBackupComponent implements OnInit {
 
-  constructor() { }
+  constructor(public guard:AuthGuard) { }
 
   ngOnInit(): void {
   }
 
+  restaurar(){
+  
+  }
+
+  generarbackup(){}
 }
