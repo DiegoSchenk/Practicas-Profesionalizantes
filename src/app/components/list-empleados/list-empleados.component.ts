@@ -16,6 +16,7 @@ import { EmpresaService } from 'src/app/services/empresa.service';
 import { Router } from '@angular/router';
 import { AngularFirestore } from '@angular/fire/firestore';
 
+
 @Component({
   selector: 'app-list-empleados',
   templateUrl: './list-empleados.component.html',
@@ -205,6 +206,11 @@ export class ListEmpleadosComponent implements OnInit {
     })
   }
 
+  generarBackup2(){
+    
+
+
+  }
   generarBackup(){
     
       const { parse } = require('json2csv');

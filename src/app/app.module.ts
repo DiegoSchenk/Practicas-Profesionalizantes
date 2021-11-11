@@ -39,6 +39,8 @@ import { EmpresaService } from './services/empresa.service';
 import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
 import { DataTableComponent } from './components/situacion-iva/data-table/data-table.component';
+import { RestaurarBackupComponent } from './components/restaurar-backup/restaurar-backup.component';
+import { ContaduriaComponent } from './components/contaduria/contaduria.component';
 
 
 @NgModule({
@@ -56,7 +58,9 @@ import { DataTableComponent } from './components/situacion-iva/data-table/data-t
     AuditoriaIvaComponent,
     LoginEmpresasComponent,
     CreateEmpresaComponent,
-    DataTableComponent
+    DataTableComponent,
+    RestaurarBackupComponent,
+    ContaduriaComponent
   ],
   imports: [
     BrowserModule,
