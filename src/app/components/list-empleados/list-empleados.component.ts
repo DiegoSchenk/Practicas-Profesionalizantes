@@ -208,7 +208,7 @@ export class ListEmpleadosComponent implements OnInit {
 
   generarBackup2(){
     
-
+   
 
   }
   generarBackup(){
