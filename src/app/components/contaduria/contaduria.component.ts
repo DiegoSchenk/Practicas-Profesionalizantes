@@ -13,16 +13,4 @@ export class ContaduriaComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  libroDiario(){
-
-  }
-  
-  diarioMayor(){
-
-  }
-
-  balanceGeneral(){
-
-  }
-
 }

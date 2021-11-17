@@ -41,6 +41,10 @@ import { FileSaverModule, FileSaverService } from 'ngx-filesaver';
 import { DataTableComponent } from './components/situacion-iva/data-table/data-table.component';
 import { RestaurarBackupComponent } from './components/restaurar-backup/restaurar-backup.component';
 import { ContaduriaComponent } from './components/contaduria/contaduria.component';
+import { LibrodiarioComponent } from './components/librodiario/librodiario.component';
+import { MayordiarioComponent } from './components/mayordiario/mayordiario.component';
+import { BalanceGeneralComponent } from './components/balance-general/balance-general.component';
+import { AsientosComponent } from './components/asientos/asientos.component';
 
 
 @NgModule({
@@ -60,7 +64,11 @@ import { ContaduriaComponent } from './components/contaduria/contaduria.componen
     CreateEmpresaComponent,
     DataTableComponent,
     RestaurarBackupComponent,
-    ContaduriaComponent
+    ContaduriaComponent,
+    LibrodiarioComponent,
+    MayordiarioComponent,
+    BalanceGeneralComponent,
+    AsientosComponent
   ],
   imports: [
     BrowserModule,

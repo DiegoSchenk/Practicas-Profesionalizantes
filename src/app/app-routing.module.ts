@@ -14,6 +14,10 @@ import { LoginEmpresasComponent } from './components/login-empresas/login-empres
 import { CreateEmpresaComponent } from './components/create-empresa/create-empresa.component';
 import { RestaurarBackupComponent } from './components/restaurar-backup/restaurar-backup.component';
 import { ContaduriaComponent } from './components/contaduria/contaduria.component';
+import { AsientosComponent } from './components/asientos/asientos.component';
+import { BalanceGeneralComponent } from './components/balance-general/balance-general.component';
+import { LibrodiarioComponent } from './components/librodiario/librodiario.component';
+import { MayordiarioComponent } from './components/mayordiario/mayordiario.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login-empresas', pathMatch: 'full' },
@@ -23,6 +27,10 @@ const routes: Routes = [
   { path: 'restaurar-backup', component: RestaurarBackupComponent ,canActivate: [AuthGuard]},
   { path: 'contaduria', component: ContaduriaComponent ,canActivate: [AuthGuard]},
   { path: 'create-empleado', component: CreateEmpleadoComponent,canActivate: [AuthGuard] },
+  { path: 'asientos', component: AsientosComponent,canActivate: [AuthGuard] },
+  { path: 'balance-general', component: BalanceGeneralComponent,canActivate: [AuthGuard] },
+  { path: 'librodiario', component: LibrodiarioComponent,canActivate: [AuthGuard] },
+  { path: 'mayordiario', component: MayordiarioComponent,canActivate: [AuthGuard] },
   { path: 'create-empresa', component: CreateEmpresaComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent},
   { path: 'editSituacionIVA/:id', component: CreateIvaComponent},
