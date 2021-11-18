@@ -45,7 +45,7 @@ import { LibrodiarioComponent } from './components/librodiario/librodiario.compo
 import { MayordiarioComponent } from './components/mayordiario/mayordiario.component';
 import { BalanceGeneralComponent } from './components/balance-general/balance-general.component';
 import { AsientosComponent } from './components/asientos/asientos.component';
-import { PlandecuentasComponent } from './components/plandecuentas/plandecuentas.component';
+
 
 
 @NgModule({
@@ -69,8 +69,7 @@ import { PlandecuentasComponent } from './components/plandecuentas/plandecuentas
     LibrodiarioComponent,
     MayordiarioComponent,
     BalanceGeneralComponent,
-    AsientosComponent,
-    PlandecuentasComponent
+    AsientosComponent
   ],
   imports: [
     BrowserModule,
