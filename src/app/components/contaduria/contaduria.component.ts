@@ -18,6 +18,7 @@ export class ContaduriaComponent implements OnInit {
     if(num == 1) this.router.navigate(['asientos']);
     else if (num == 2) this.router.navigate(['balance-general']);
     else if (num == 3) this.router.navigate(['librodiario']);
-    else this.router.navigate(['mayordiario']);
+    else if (num == 4)this.router.navigate(['mayordiario']);
+    else this.router.navigate(['plandecuentas'])
   }
 }

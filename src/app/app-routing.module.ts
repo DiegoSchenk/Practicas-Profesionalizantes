@@ -18,6 +18,7 @@ import { AsientosComponent } from './components/asientos/asientos.component';
 import { BalanceGeneralComponent } from './components/balance-general/balance-general.component';
 import { LibrodiarioComponent } from './components/librodiario/librodiario.component';
 import { MayordiarioComponent } from './components/mayordiario/mayordiario.component';
+import { PlandecuentasComponent } from './components/plandecuentas/plandecuentas.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login-empresas', pathMatch: 'full' },
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'balance-general', component: BalanceGeneralComponent,canActivate: [AuthGuard] },
   { path: 'librodiario', component: LibrodiarioComponent,canActivate: [AuthGuard] },
   { path: 'mayordiario', component: MayordiarioComponent,canActivate: [AuthGuard] },
+  { path: 'plandecuentas', component: PlandecuentasComponent,canActivate: [AuthGuard] },
   { path: 'create-empresa', component: CreateEmpresaComponent },
   { path: 'editEmpleado/:id', component: CreateEmpleadoComponent},
   { path: 'editSituacionIVA/:id', component: CreateIvaComponent},
